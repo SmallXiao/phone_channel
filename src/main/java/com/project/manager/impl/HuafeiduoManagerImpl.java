@@ -1,8 +1,6 @@
 package com.project.manager.impl;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,8 +16,8 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 	
 	private static final Logger LOG = LogManager.getLogger(HuafeiduoManagerImpl.class);
 
-	private static final String API_KEY = "11111";
-	private static final String SECRET_KEY = "222";
+	private static final String API_KEY = "oDd92EdyQwBFisvfdSdwNvdVrwLVSpK7SN5Jh89XsysBRNHUvKg97jTnGu9nJHjr";
+	private static final String SECRET_KEY = "kc2s0YesmxT4apNv1UuV4c9zx7M7DVnOYd7X30edxY8xcKS3tbNmeLLBHnx09LNW";
 	// 查询账户余额
 	private static String ACCOUNT_BALANCE = "http://api.huafeiduo.com/gateway.cgi?mod=account.balance?api_key=%s&sign=%s";
 	
@@ -32,19 +30,14 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 	// 查询充值订单状态
 	private static String ORDER_PHONE_STATUS = "http://api.huafeiduo.com/gateway.cgi?mod=order.phone.status?sp_order_id=%s&api_key=%s&sign=%s";
 	
-	
 	private static String NOTIFY_URL = "notify_url";
-	private void ksort() {
-		
-	}
-	
 	
 	public void getAccountBalance() {
 		String sign = Md5.crypt("api_key" + API_KEY + SECRET_KEY);
-		String result = HttpUtil.get(String.format(ACCOUNT_BALANCE, API_KEY, sign));
-		LOG.trace(result);
-		
-		
+		String url = String.format(ACCOUNT_BALANCE, API_KEY, sign);
+		System.out.println(url);
+		String result = HttpUtil.get(url);
+		LOG.info(result);
 	}
 
 	public void orderPhoneCheck(String phoneNumber, String cardWorth) {
@@ -58,9 +51,9 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		}
 		sign.append(SECRET_KEY);
 		System.out.println(sign);
-		
-		String result = HttpUtil.get(String.format(ORDER_PHONE_CHECK, phoneNumber, cardWorth, API_KEY, sign.toString()));
-		LOG.trace(result);
+		String url = String.format(ORDER_PHONE_CHECK, phoneNumber, cardWorth, API_KEY, sign.toString());
+		String result = HttpUtil.get(url);
+		LOG.info(result);
 	}
 
 	public void orderPhoneSubmit(String phoneNumber, String cardWorth,
@@ -78,7 +71,7 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		System.out.println(sign);
 		
 		String result = HttpUtil.get(String.format(ORDER_PHONE_SUBMIT, phoneNumber, cardWorth, spOrderId, NOTIFY_URL, API_KEY, sign.toString()));
-		LOG.trace(result);
+		LOG.info(result);
 	}
 
 	public void orderPhoneStatus(String spOrderId) {
@@ -93,11 +86,12 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		System.out.println(sign);
 		
 		String result = HttpUtil.get(String.format(ORDER_PHONE_STATUS, spOrderId, API_KEY, sign.toString()));
-		LOG.trace(result);
+		LOG.info(result);
 	}
 	
 	public static void main(String[] args) {
-		new HuafeiduoManagerImpl().orderPhoneSubmit("15275968277", "100", "111");
+		new HuafeiduoManagerImpl().getAccountBalance();
+//		new HuafeiduoManagerImpl().orderPhoneCheck("15275968277", "100");
 	}
 
 }

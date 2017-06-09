@@ -1,5 +1,9 @@
 package com.project.manager;
 
+
+/**
+ * 话费多
+ */
 public interface HuafeiduoManager {
 	
 	/**

@@ -12,14 +12,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/pay")
-public class PayController {
+@RequestMapping("/phone")
+public class PhoneController {
 
-	private static final Logger LOG = LogManager.getLogger(PayController.class);
-	
+	private static final Logger LOG = LogManager.getLogger(PhoneController.class);
+
+	/**
+	 * 话费充值
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value="/recharge", method=RequestMethod.GET)
 	@ResponseBody
 	public void recharge(HttpServletRequest request, HttpServletResponse response) {
+		
+		String phoneNumber = request.getParameter("phoneNum");
+		String sign = request.getParameter("sign");
+
 		
 	}
 	
