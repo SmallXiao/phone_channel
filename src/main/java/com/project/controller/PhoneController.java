@@ -29,7 +29,6 @@ public class PhoneController {
 		String phoneNumber = request.getParameter("phoneNum");
 		String sign = request.getParameter("sign");
 
-		
 	}
 	
 }
