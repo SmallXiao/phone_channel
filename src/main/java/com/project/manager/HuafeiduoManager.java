@@ -16,7 +16,7 @@ public interface HuafeiduoManager {
 	 * @param phoneNumber				手机号
 	 * @param cardWorth						充值面额
 	 */
-	public void orderPhoneCheck(String phoneNumber, String cardWorth);
+	public String orderPhoneCheck(String phoneNumber, String cardWorth);
 	
 	/**
 	 * 提交充值订单
@@ -24,13 +24,13 @@ public interface HuafeiduoManager {
 	 * @param cardWorth						充值面额
 	 * @param spOrderId						商户唯一订单号
 	 */
-	public void orderPhoneSubmit(String phoneNumber, String cardWorth, String spOrderId);
+	public String orderPhoneSubmit(String phoneNumber, String cardWorth, String spOrderId);
 
 	/**
 	 * 查询充值订单状态
 	 * @param spOrderId						商户唯一订单号
 	 */
-	public void orderPhoneStatus(String spOrderId);
+	public String orderPhoneStatus(String spOrderId);
 	
 	
 	

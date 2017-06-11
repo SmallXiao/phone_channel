@@ -30,7 +30,7 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 	// 查询充值订单状态
 	private static String ORDER_PHONE_STATUS = "http://api.huafeiduo.com/gateway.cgi?mod=order.phone.status&sp_order_id=%s&api_key=%s&sign=%s";
 	
-	private static String NOTIFY_URL = "notify_url";
+//	private static String NOTIFY_URL = "notify_url";
 	
 	public void getAccountBalance() {
 		String sign = Md5.crypt("api_key" + API_KEY + SECRET_KEY);
@@ -40,7 +40,7 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		LOG.info(result);
 	}
 
-	public void orderPhoneCheck(String phoneNumber, String cardWorth) {
+	public String orderPhoneCheck(String phoneNumber, String cardWorth) {
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put("phone_number", phoneNumber);
 		treeMap.put("card_worth", cardWorth);
@@ -55,9 +55,10 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		String url = String.format(ORDER_PHONE_CHECK, phoneNumber, cardWorth, API_KEY, sign);
 		String result = HttpUtil.get(url);
 		LOG.info(result);
+		return result;
 	}
 
-	public void orderPhoneSubmit(String phoneNumber, String cardWorth,
+	public String orderPhoneSubmit(String phoneNumber, String cardWorth,
 			String spOrderId) {
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put("phone_number", phoneNumber);
@@ -73,9 +74,10 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		
 		String result = HttpUtil.get(String.format(ORDER_PHONE_SUBMIT, phoneNumber, cardWorth, spOrderId, API_KEY, sign));
 		LOG.info(result);
+		return result;
 	}
 
-	public void orderPhoneStatus(String spOrderId) {
+	public String orderPhoneStatus(String spOrderId) {
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put("api_key", API_KEY);
 		treeMap.put("sp_order_id", spOrderId);
@@ -88,6 +90,7 @@ public class HuafeiduoManagerImpl implements HuafeiduoManager{
 		
 		String result = HttpUtil.get(String.format(ORDER_PHONE_STATUS, spOrderId, API_KEY, sign.toString()));
 		LOG.info(result);
+		return result;
 	}
 	
 
