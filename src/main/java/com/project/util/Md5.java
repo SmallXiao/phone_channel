@@ -1,31 +1,36 @@
 package com.project.util;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class Md5 {
 
-	private static char hexs[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
-		'b', 'c', 'd', 'e', 'f' };
-	
 	public static String crypt(String source) {
 		try {
-			MessageDigest digester = MessageDigest.getInstance("MD5");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(source.getBytes());
+			byte b[] = md.digest();
 
-			byte[] sbs = source.getBytes("UTF8");
-			digester.update(sbs);
-			byte[] rbs = digester.digest();
-			int j = rbs.length;
-			char result[] = new char[j * 2];
-			int k = 0;
-			for (int i = 0; i < j; i++) {
-				byte b = rbs[i];
-				result[k++] = hexs[b >>> 4 & 0xf];
-				result[k++] = hexs[b & 0xf];
+			int i;
+
+			StringBuffer buf = new StringBuffer("");
+			for (int offset = 0; offset < b.length; offset++) {
+				i = b[offset];
+				if (i < 0)
+					i += 256;
+				if (i < 16)
+					buf.append("0");
+				buf.append(Integer.toHexString(i));
 			}
-			return new String(result);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-}
 
+			return buf.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+}
