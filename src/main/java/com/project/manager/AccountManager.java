@@ -7,4 +7,8 @@ public interface AccountManager {
 	public String login(String accountName, String password);
 	
 	public int changePassword(String accountId, String password, String newPassword);
+	
+	public int changePayPassword(String accountId, String password, String payPassword);
+	
+	public int changePayeeName(String accountId, String payeeName, String payPassword);
 }

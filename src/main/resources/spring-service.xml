@@ -5,6 +5,49 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
        	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  "
 	default-autowire="byName">
+	<bean id="mysqlDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${mysql.db.driver}" />
+		<property name="jdbcUrl" value="${mysql.db.url}" />
+		<property name="user" value="${mysql.db.username}" />
+		<property name="password" value="${mysql.db.password}" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="initialPoolSize" value="5" />
+		<property name="maxIdleTime" value="60" />
+		<property name="acquireIncrement" value="5" />
+		<property name="maxStatements" value="0" />
+		<property name="preferredTestQuery" value="select * from dual" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+
+	<!-- 创建SqlSessionFactory -->
+	<bean id="mysqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mysqlDataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-mysql-config.xml" />
+	</bean>
+
+	<bean id="mysqlMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="mysqlSessionFactory" />
+		<property name="basePackage" value="com.project.mapper"></property>
+	</bean>
+	<!-- 事务管理器 -->
+	<bean id="mysqlTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mysqlDataSource" />
+		<qualifier value="mysql" />
+	</bean>
+	<bean id="mysqlTransactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager">
+			<ref bean="mysqlTransactionManager" />
+		</property>
+	</bean>
+	<!-- 开启事务注解驱动 -->  
+	<!-- <tx:annotation-driven transaction-manager="mysqlTransactionManager" /> -->
 	
 	<!-- 自动检索service -->
 	<context:component-scan base-package="com.project.manager.impl" />

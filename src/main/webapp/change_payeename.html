@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -87,20 +87,14 @@
                         <div class="panel-body">
                             <form role="form">
                                         <div class="form-group">
-                                            <label>输入旧登录密码</label>
+                                            <label>修改收款人姓名</label>
                                             <input id="password" class="form-control" type="password" />
                                         </div>
                                  <div class="form-group">
-                                            <label>输入新登录密码</label>
+                                            <label>输入支付密码</label>
                                             <input id="newpassword" class="form-control" type="password" />
-                                        </div>
-                                            <div class="form-group">
-                                            <label>确认新登录密码</label>
-                                            <input id="repeatnewpassword" class="form-control" type="password" />
-                                        </div>
-                                  
                                  
-                                        <button type="button" onclick="pay_password()" class="btn btn-info">修改</button>
+                                        <button type="button" onclick="change_password()" class="btn btn-info">修改</button>
 
                                     </form>
                             </div>
@@ -131,24 +125,30 @@
 </body>
 
 <script type="text/javascript">
-function pay_password() {// 修改支付密码
-	var accountId = localStorage.setItem("id");
-	var password = $("#password").val();// 密码
-	// var repeatPassword = $("#register_repeat_password").val();// 重复密码
-	$.ajax({
-		url:"/account/payPassword/" + accountId,
-	    type:'POST',
-	    dataType:'JSON',
-	    data:{"password" : password},
-	    success:function(data){
-	    	if (data.status == 1) {// 登陆成功，跳转到首页
-	    		alert("修改支付密码成功！");
-		    	window.location.href = "index.html";
-	    	}
-	    },error:function(data){
-	    	console.log("网络异常，请重新尝试！");
-	    }
-	});
-}	
+	function change_password() {// 用户修改密码
+		var accountId = localStorage.getItem("id");
+	
+		var password = $("#password").val();
+		var newPassword = $("#newpassword").val();
+		var repeatnewpassword = $("repeatnewpassword").val();
+		alert(accountId);
+		alert(password);
+		alert(newPassword);
+		
+		$.ajax({
+			url:"/account/password/" + accountId,
+		    type:'POST',
+		    dataType:'JSON',
+		    data:{"password":password, "newPassword":newPassword},
+		    success:function(data){
+		    	if (data.status == 1) {// 修改成功，跳转到首页
+		    		alert("修改密码成功！");
+		    	}
+		    },error:function(data){
+		    	console.log("网络异常，请重新尝试！");
+		    }
+		});
+	}
+	
 </script>
 </html>

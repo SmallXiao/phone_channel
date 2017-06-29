@@ -15,4 +15,10 @@ public interface AccountMapper {
 	
 	public int changePassword(@Param("id") String accountId, @Param("password") String password, 
 			@Param("newPassword") String newPassword, @Param("time") long time);
+	
+	public int changePayPassword(@Param("id") String accountId, @Param("old_pay_password") String oldPayPassword, 
+			@Param("pay_password") String payPassword, @Param("time") long time);
+	
+	public int changePayeeName(@Param("id") String accountId, @Param("pay_password") String payPassword, 
+			@Param("payee_name") String payeeName, @Param("time") long time); 
 }

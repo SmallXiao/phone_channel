@@ -3,6 +3,7 @@ package com.project.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.project.manager.AccountManager;
 import com.project.util.HttpServletUtil;
 import com.project.util.Md5;
@@ -31,7 +30,6 @@ public class AccountController {
 	@Autowired
 	private AccountManager accountManager;
 	
-	
 	/**
 	 * 用户注册
 	 * @param request
@@ -45,11 +43,10 @@ public class AccountController {
 		String accountName = request.getParameter("accountName");
 		String password = request.getParameter("password");
 		
+		LOG.trace(String.format("accountName：%s", accountName));
 		accountManager.register(accountName, Md5.crypt(password));
-//		return HttpServletUtil.getResponseJsonData(1, "success");
-		return null;
+		return HttpServletUtil.getResponseJsonData(1, "success");
 	}
-	
 	
 	/**
 	 * 用户登陆
@@ -85,7 +82,7 @@ public class AccountController {
 		
 		int result = accountManager.changePassword(accountId, Md5.crypt(password), Md5.crypt(newPassword));
 		System.out.println(result);
-		return null;
+		return HttpServletUtil.getResponseJsonData(1, accountId, "success");
 	}
 	
 	/**
@@ -98,11 +95,15 @@ public class AccountController {
 	@ResponseBody
 	public String changePayPassword(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable("accountId") String accountId) {
-		HttpServletUtil.initResponse(response);
-		String password = request.getParameter("password");// 旧密码
-		String newPassword = request.getParameter("newPassword");// 新密码
+		LOG.trace("accountId：" + accountId);
 		
-		return null;
+		HttpServletUtil.initResponse(response);
+		String oldPayPassword = request.getParameter("oldPayPassword");// 旧支付密码
+		String payPassword = request.getParameter("payPassword");// 新支付密码
+		
+		int result = accountManager.changePayPassword(accountId, Md5.crypt(oldPayPassword), Md5.crypt(payPassword));
+		
+		return HttpServletUtil.getResponseJsonData(result, "success");
 	}
 	
 	/**
@@ -111,13 +112,16 @@ public class AccountController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/payeeName", method = RequestMethod.POST)
+	@RequestMapping(value="/payeeName/{accountId}", method = RequestMethod.POST)
 	@ResponseBody
-	public String changePayeeName(HttpServletRequest request, HttpServletResponse response) {
+	public String changePayeeName(HttpServletRequest request, HttpServletResponse response,
+			@Param("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
-		String accountName = request.getParameter("accountName");// 用户名
-		String oldPassword = request.getParameter("oldPass");// 旧密码
-		String newPassword = request.getParameter("newPass");// 新密码
+
+		String payeeName = request.getParameter("payeeName");// 收款人姓名
+		String payPassword = request.getParameter("payPassword");// 支付密码
+
+		accountManager.changePayeeName(accountId, payeeName, payPassword);	
 		
 		return null;
 	}

@@ -35,4 +35,18 @@ public class AccountManagerImpl implements AccountManager {
 		
 	}
 
+	@Override
+	public int changePayPassword(String accountId, String oldPayPassword, String payPassword) {
+		long currentTime = System.currentTimeMillis() / 1000;
+		return accountMapper.changePayPassword(accountId, oldPayPassword, payPassword, currentTime);
+		
+	}
+
+	@Override
+	public int changePayeeName(String accountId, String payeeName,
+			String payPassword) {
+		long currentTime = System.currentTimeMillis() / 1000;
+		return accountMapper.changePayeeName(accountId, payPassword, payeeName, currentTime);
+	}
+
 }
