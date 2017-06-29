@@ -2,6 +2,11 @@ package com.project.util;
 
 public class Configure {
 
+	
+	public static class Weixin {
+		
+	}
+	
 	/**
 	 * 充话费渠道话费多
 	 *
