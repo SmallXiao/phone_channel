@@ -32,6 +32,14 @@ public class HttpServletUtil {
 		
 		return jsonObject.toString();
 	}
+	
+	public static String getResponseJsonData(int status, String errMsg) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("status", status);
+		jsonObject.put("errMsg", errMsg);
+		
+		return jsonObject.toString();
+	}
 
 	/**
 	 * 
