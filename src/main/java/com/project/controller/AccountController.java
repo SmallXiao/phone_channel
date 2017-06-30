@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -82,7 +84,7 @@ public class AccountController {
 		
 		int result = accountManager.changePassword(accountId, Md5.crypt(password), Md5.crypt(newPassword));
 		System.out.println(result);
-		return HttpServletUtil.getResponseJsonData(1, accountId, "success");
+		return HttpServletUtil.getResponseJsonData(result, accountId, "success");
 	}
 	
 	/**
@@ -115,15 +117,13 @@ public class AccountController {
 	@RequestMapping(value="/payeeName/{accountId}", method = RequestMethod.POST)
 	@ResponseBody
 	public String changePayeeName(HttpServletRequest request, HttpServletResponse response,
-			@Param("accountId") String accountId) {
+			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
-
 		String payeeName = request.getParameter("payeeName");// 收款人姓名
-		String payPassword = request.getParameter("payPassword");// 支付密码
-
-		accountManager.changePayeeName(accountId, payeeName, payPassword);	
+		LOG.trace(String.format("accountId：%s，payeeName：%s", accountId, payeeName));
 		
-		return null;
+		int result = accountManager.changePayeeName(accountId, payeeName);	
+		return HttpServletUtil.getResponseJsonData(result, "success");
 	}
 	
 	
@@ -133,12 +133,57 @@ public class AccountController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/bindingBack", method = RequestMethod.POST)
-	public String bindingBank(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/bindingBack/{accountId}", method = RequestMethod.POST)
+	public String bindingBank(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		
+		String payeeName = request.getParameter("payeeName");// 收款人姓名
+		String cardNumber = request.getParameter("cardNumber");// 收款人卡号
+		String bankAllas = request.getParameter("bankAllas");// 开户行
+		String province = request.getParameter("province");// 开户省份
+		String city = request.getParameter("city");// 开户城市
+		String place = request.getParameter("place");// 开户网点
+		int result = accountManager.bindingBank(accountId, payeeName, cardNumber, bankAllas, province, city, place);
 		
+		return HttpServletUtil.getResponseJsonData(result, "success");
+	}
+	
+	/**
+	 * 获取当前登录用户绑定银行卡信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/bankards/{accountId}", method = RequestMethod.GET)
+	public String bankards(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+		
+//		List<String> bankList = accountManager.bankards(accountId);
+		
+		
+//		return HttpServletUtil.getResponseJsonData(1, data, "success");
 		return null;
+		
+	}
+	
+	
+	/**
+	 * 得到当前登录用户的收款人姓名
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/payeeName/{accountId}", method = RequestMethod.GET)
+	@ResponseBody
+	public String payeeName(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+		String payeeName = accountManager.getPayeeName(accountId);
+		String name = payeeName.split("")[1] + "**";
+		
+		return HttpServletUtil.getResponseJsonData(1, name, "success");
 		
 		
 	}

@@ -355,9 +355,9 @@
 		    	if (result.status == 1) {// 登陆成功，跳转到首页
 		    		if (result.data != null && result.data != '') {
 		    			alert("登录成功！");
-						console.log(result);
-		    			localStorage.setItem("id", result.data);
-				    	window.location.href = "index.html";
+		    			localStorage.setItem("id", result.data);// 缓存用户ID
+		    			localStorage.setItem("name", accountName);// 缓存用户名
+				    	window.location.href = "main.html";
 		    		} else {
 		    			alert("用户名或密码错误，请重新输入！");	
 		    		}

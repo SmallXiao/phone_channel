@@ -10,5 +10,10 @@ public interface AccountManager {
 	
 	public int changePayPassword(String accountId, String password, String payPassword);
 	
-	public int changePayeeName(String accountId, String payeeName, String payPassword);
+	public int changePayeeName(String accountId, String payeeName);
+	
+	public String getPayeeName(String accountId);
+	
+	public int bindingBank(String accountId, String payeeName, String cardNumber, String bankAllas,
+			String province, String city, String place);
 }

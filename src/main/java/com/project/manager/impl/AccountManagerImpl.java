@@ -43,10 +43,22 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	@Override
-	public int changePayeeName(String accountId, String payeeName,
-			String payPassword) {
+	public int changePayeeName(String accountId, String payeeName) {
 		long currentTime = System.currentTimeMillis() / 1000;
-		return accountMapper.changePayeeName(accountId, payPassword, payeeName, currentTime);
+		return accountMapper.changePayeeName(accountId, payeeName, currentTime);
+	}
+
+	@Override
+	public String getPayeeName(String accountId) {
+		return accountMapper.getPayeeName(accountId);
+	}
+
+	@Override
+	public int bindingBank(String accountId, String payeeName,
+			String cardNumber, String bankAllas, String province, String city,
+			String place) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

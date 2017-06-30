@@ -19,6 +19,8 @@ public interface AccountMapper {
 	public int changePayPassword(@Param("id") String accountId, @Param("old_pay_password") String oldPayPassword, 
 			@Param("pay_password") String payPassword, @Param("time") long time);
 	
-	public int changePayeeName(@Param("id") String accountId, @Param("pay_password") String payPassword, 
-			@Param("payee_name") String payeeName, @Param("time") long time); 
+	public int changePayeeName(@Param("id") String accountId, @Param("payee_name") String payeeName, @Param("time") long time); 
+
+	public String getPayeeName(@Param("id") String accountId);
+
 }

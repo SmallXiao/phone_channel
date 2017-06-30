@@ -25,7 +25,13 @@
 
 	<update id="changePayeeName" parameterType="java.lang.String">
 		UPDATE account SET payee_name=#{payee_name}, update_time=#{time}
-			WHERE id=#{id} AND pay_password=#{pay_password}
+			WHERE id=#{id}
 	</update>
+
+	<select id="getPayeeName" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT payee_name FROM account WHERE id=#{id}
+	
+	</select>
+
 	
 </mapper>
