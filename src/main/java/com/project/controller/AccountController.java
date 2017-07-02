@@ -181,7 +181,10 @@ public class AccountController {
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		String payeeName = accountManager.getPayeeName(accountId);
-		String name = payeeName.split("")[1] + "**";
+		String name = "";
+		if (payeeName != null && "".equals(payeeName)) {
+			name = payeeName.split("")[1] + "**";
+		}
 		
 		return HttpServletUtil.getResponseJsonData(1, name, "success");
 		

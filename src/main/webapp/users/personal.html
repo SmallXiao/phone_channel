@@ -159,7 +159,7 @@
 								</a>
 							</div>
 						</div>
-						<a class="highlight-color" href="javascript:;">退出</a>
+						<a class="highlight-color" href="javascript:;" onclick="quit()">退出</a>
 					</div>
 				</div>
 				<div class="right">
@@ -442,12 +442,34 @@
 				</div>
 			</div>
 
-			<script>
+			
+
+		</div>
+		<div id="template-footer">
+
+			<div id="copyright" class="wrap"
+				style="height: 58px; padding-top: 0px; position: relative;">
+				<div class="wrap-inner clearfix" style="">
+					<div class="footer-nav" style="margin-top: 10px;">
+						<a href="/static/help.html#30">关于多宝2</a> <a
+							href="/static/help.html#9">存款帮助</a> <a href="/static/help.html#3">常见问题</a>
+						<a href="/static/help.html#29" class="last">条款规定</a>
+					</div>
+					<div class="copyright-p">&copy; 2017 多宝2 All Rights Reserved
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+<script>
 (function($){
 	
     $("#user-name").html(localStorage.getItem("name"));
     $("#name").append(localStorage.getItem("name"));
-    
     
 	$('.nav-ucenter').addClass('active');
     $('#J-button-submit').click(function(){
@@ -504,26 +526,11 @@ function changeName(){
 	    }
 	});
 }
+
+function quit() {
+	localStorage.clear();
+	window.location.href="login.html";
+}
+
 </script>
-
-		</div>
-		<div id="template-footer">
-
-			<div id="copyright" class="wrap"
-				style="height: 58px; padding-top: 0px; position: relative;">
-				<div class="wrap-inner clearfix" style="">
-					<div class="footer-nav" style="margin-top: 10px;">
-						<a href="/static/help.html#30">关于多宝2</a> <a
-							href="/static/help.html#9">存款帮助</a> <a href="/static/help.html#3">常见问题</a>
-						<a href="/static/help.html#29" class="last">条款规定</a>
-					</div>
-					<div class="copyright-p">&copy; 2017 多宝2 All Rights Reserved
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-</body>
 </html>

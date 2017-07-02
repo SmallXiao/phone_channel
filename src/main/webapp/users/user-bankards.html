@@ -134,50 +134,38 @@
 
     });
   </script>
-<!-- build:js /static/scripts/vendor-top.min.js -->
-<!--<script src="/assets/js/dsgame.base.js"></script>
-  <script src="/assets/js/dsgame.DatePicker.js"></script>
-  <script src="/assets/js/dsgame.Select.js"></script>
-  <script src="/assets/js/jquery.mousewheel.min.js"></script>-->
-<!-- endbuild -->
 </head>
 <body>
 	<div class="response-wrap">
-
-
-
 		<div id="header" class="wrap">
 			<div class="wrap-inner">
 				<div class="left top-nav">
 					<!-- 用户中心 -->
 					<div class="top-nav-user">
-						<em>欢迎您,&nbsp;&nbsp;</em> <a href="/hz/mkg/users/user"
+						<em>欢迎您,&nbsp;&nbsp;</em> <a href="/users/user.html"
 							class="top-nav-toggle" data-overdropdown="handler"> <span
-							data-user-name>zx19926276</span> <i class="caret"></i>
+							id="user-name" data-user-name></span> <i class="caret"></i>
 						</a>
 						<div class="top-nav-menu" data-overdropdown="dropdown">
 							<div class="top-user-links clearfix">
-								<a href="/hz/mkg/users/change-password.html" class="tul-link1">
+								<a href="/users/change-password.html" class="tul-link1">
 									<i></i> <span>登录密码</span>
-								</a> <a href="/hz/mkg/users/change-fund-password.html"
+								</a> <a href="/users/change-fund-password.html"
 									class="tul-link2"> <i></i> <span>资金密码</span>
-								</a> <a href="/hz/mkg/users/personal" class="tul-link3"> <i></i>
+								</a> <a href="/users/personal.html" class="tul-link3"> <i></i>
 									<span>修改资料</span>
-								</a> <a href="/hz/mkg/users/user-bankards" class="tul-link4"> <i></i>
+								</a> <a href="/users/user-bankards.html" class="tul-link4"> <i></i>
 									<span>银行卡</span>
 								</a>
 							</div>
 						</div>
-						<a class="highlight-color" href="javascript:;">退出</a> <a
-							class="li-line">|</a> <a href="/hz/mkg/message/go">站内信</a> <i
-							class="msg-tip"></i> </a>
+						<a class="highlight-color" href="javascript:;" onclick="quit()">退出</a> 
 					</div>
 				</div>
 				<div class="right">
 					<ul class="top-account">
 						<li id="top-switch" data-overdropdown="handler"><a
-							href="javascript:;" class="top-switch-link"><em
-								class="m_ico">&#59218;</em></a>
+							href="javascript:;" class="top-switch-link"><em class="m_ico">&#59218;</em></a>
 							<div id="top-switch-menu" data-overdropdown="dropdown">
 								<ul>
 									<li><label><em class="m_ico m_moresize">&#59217;</em>音效</label><em
@@ -193,18 +181,14 @@
 						<li class="top-account-deposit"><a
 							href="/hz/mkg/users/deposit.html"> <i></i> <span>充值</span>
 						</a></li>
-						<li class="top-account-withdraw"><a href="/hz/mkg/qukuan">
+						<li class="top-account-withdraw"><a href="/qukuan">
 								<i></i> <span>提款</span>
 						</a></li>
 						<li class="top-account-transfer"><a
-							href="/hz/mkg/pay/goTransfer"> <i></i> <span>平台转账</span>
+							href="/pay/goTransfer"> <i></i> <span>平台转账</span>
 								<li class="deposit-record"><a
-									href="/hz/mkg/statement.html#recharge_view"> <span
-										class="opacity-60">充值记录</span> <span class="li-line">|</span>
-										<li class="top-account-gm"><a class="opacity-60"
-											data-call-center
-											href="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=819082&configID=64920&jid=6634132239&s=1"
-											target="_blank">多宝2客服</a></li>
+									href="/statement.html#recharge_view"> <span
+										class="opacity-60">充值记录</span>
 								</a></li>
 					</ul>
 				</div>
@@ -222,7 +206,7 @@
 					</div>
 				</div>
 
-				<a href="/hz/home" class="left" id="logo">多宝2游戏</a> <span
+				<a href="/home" class="left" id="logo">多宝2游戏</a> <span
 					class="logo-diff">多宝2游戏</span>
 				<ul class="nav-content right">
 					<!--<li>
@@ -244,7 +228,7 @@
 					</a></li>
 					<li data-account data-overdropdown="handler"><a
 						class="nav-ucenter nav-account" href="javascript:;"> <i></i><span>账户管理</span>
-						<!--<b class="caret"></b>-->
+							<!--<b class="caret"></b>-->
 					</a> <!--账户管理下拉-->
 						<div class="nav-account-lists" data-overdropdown="dropdown">
 							<div class="mask"></div>
@@ -420,9 +404,6 @@
 							<li class="current"><a href="/users/user-bankards.html"><span>银行卡管理</span></a></li>
 						</ul>
 					</div>
-
-
-
 					<div id="edit-card" class="content">
 						<div class="prompt-text">
 							您已绑定了银行卡。<span><a href="javascript:void(0);">添加银行卡</a></span>
@@ -434,9 +415,6 @@
 								<th>开户行</th>
 								<th>持卡人</th>
 							</tr>
-
-							
-
 						</table>
 					</div>
 
@@ -514,7 +492,6 @@
 							<option value="SPDB">上海浦发银行</option>
 
 						</select>
-
 						<!-- </div> -->
 					</div>
 
@@ -641,7 +618,10 @@
 </body>
 <script>
 
-$(function() {
+(function($){
+	alert(1);
+	  $("#user-name").html(localStorage.getItem("name"));
+	
 	$.ajax({
 		url:"/account/bankards/" + accountId,
 	    type:'GET',
@@ -663,28 +643,29 @@ $(function() {
 	$("#J-province").change(function(){
 		alert(2);
 	});
-	function getCities() {
-		alert(1);
-		var provid = $("#J-province").val();
-		alert(provid);
-		$.ajax({
-			url:"http://www.da883.com/hz/pay/getcities?provid=" + provid,
-		    type:'GET',
-		    dataType:'JSON',
-		    success:function(result){
-		    	if (result.status == 1) {// 修改成功，跳转到首页
-				
-		    		payeeName = result.data;
-		    		$("#J-input-nickname").val(payeeName);
-		    	} else {
-		    		alert("网络异常，请重新尝试！");
-		    	}
-		    },error:function(result){
-		    	console.log("网络异常，请重新尝试！");
-		    }
-		});
-	}
-});
+	
+})(jQuery);
 
+function getCities() {
+	alert(1);
+	var provid = $("#J-province").val();
+	alert(provid);
+	$.ajax({
+		url:"http://www.da883.com/hz/pay/getcities?provid=" + provid,
+	    type:'GET',
+	    dataType:'JSON',
+	    success:function(result){
+	    	if (result.status == 1) {// 修改成功，跳转到首页
+			
+	    		payeeName = result.data;
+	    		$("#J-input-nickname").val(payeeName);
+	    	} else {
+	    		alert("网络异常，请重新尝试！");
+	    	}
+	    },error:function(result){
+	    	console.log("网络异常，请重新尝试！");
+	    }
+	});
+}
 </script>
 </html>
