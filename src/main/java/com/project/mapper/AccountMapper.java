@@ -22,5 +22,9 @@ public interface AccountMapper {
 	public int changePayeeName(@Param("id") String accountId, @Param("payee_name") String payeeName, @Param("time") long time); 
 
 	public String getPayeeName(@Param("id") String accountId);
+	
+	public int createAgent(@Param("name")String name, @Param("password")String password, @Param("point")String point, 
+			@Param("type")String userType, @Param("parentId")String parentId, @Param("time")long time);
+	
 
 }

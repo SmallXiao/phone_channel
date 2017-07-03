@@ -33,5 +33,11 @@
 	
 	</select>
 
+	<insert id="createAgent" parameterType="java.lang.String">
+		INSERT INTO account(name,password,type,point,parent_id,create_time,update_time) 
+			VALUES(#{name}, #{password}, #{type}, #{point},#{parentId}, #{time}, #{time});
+	
+	</insert>
+
 	
 </mapper>

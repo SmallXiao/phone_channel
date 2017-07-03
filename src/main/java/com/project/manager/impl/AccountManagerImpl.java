@@ -61,4 +61,10 @@ public class AccountManagerImpl implements AccountManager {
 		return 0;
 	}
 
+	@Override
+	public int createAgent(String name, String password, String point, String userType, String parentId) {
+		long currentTime = System.currentTimeMillis() / 1000;
+		return accountMapper.createAgent(name, password, point, userType, parentId, currentTime);
+	}
+
 }

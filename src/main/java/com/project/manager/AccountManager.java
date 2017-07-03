@@ -16,4 +16,7 @@ public interface AccountManager {
 	
 	public int bindingBank(String accountId, String payeeName, String cardNumber, String bankAllas,
 			String province, String city, String place);
+	
+	
+	public int createAgent(String name, String password, String point, String userType, String parentId);
 }

@@ -129,18 +129,9 @@
 
     });
   </script>
-  <!-- build:js /static/scripts/vendor-top.min.js -->
-  <!--<script src="/assets/js/dsgame.base.js"></script>
-  <script src="/assets/js/dsgame.DatePicker.js"></script>
-  <script src="/assets/js/dsgame.Select.js"></script>
-  <script src="/assets/js/jquery.mousewheel.min.js"></script>-->
-  <!-- endbuild -->
 </head>
 <body>
   <div class="response-wrap">
-    
-
-
 <div id="header" class="wrap">
 	<div class="wrap-inner">
 		<div class="left top-nav">
@@ -161,21 +152,17 @@
 							<i></i>
 							<span>资金密码</span>
 						</a>
-						<a href="/hz/mkg/users/personal" class="tul-link3">
+						<a href="/hz/mkg/users/personal.html" class="tul-link3">
 							<i></i>
 							<span>修改资料</span>
 						</a>
-						<a href="/hz/mkg/users/user-bankards" class="tul-link4">
+						<a href="/hz/mkg/users/user-bankards.html" class="tul-link4">
 							<i></i>
 							<span>银行卡</span>
 						</a>
 					</div>
 				</div>
 				<a class="highlight-color" href="javascript:;">退出</a>
-				<a class="li-line">|</a>
-				<a href="/hz/mkg/message/go">站内信</a>
-				<i class="msg-tip"></i>
-				</a>
 			</div>
 		</div>
 		<div class="right">
@@ -215,10 +202,6 @@
 						<li class="deposit-record">
 							<a href="/hz/mkg/statement.html#recharge_view">
 								<span class="opacity-60">充值记录</span>
-								<span class="li-line">|</span>
-								<li class="top-account-gm">
-									<a class="opacity-60" data-call-center href="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=819082&configID=64920&jid=6634132239&s=1" target="_blank">多宝2客服</a>
-								</li>
 							</a>
 						</li>
 			</ul>
@@ -271,12 +254,12 @@
 					<ul class="clearfix">
 						<li>
 							<div class="list-link">
-								<a class="grgl" href="/hz/mkg/users/change-password.html">个人管理</a>
+								<a class="grgl" href="/users/change-password.html">个人管理</a>
 							</div>
 						</li>
 						<li>
 							<div class="list-link">
-								<a class="tdgl" href="/hz/mkg/user.html">团队管理</a>
+								<a class="tdgl" href="/user.html">团队管理</a>
 							</div>
 						</li>
 					</ul>
@@ -292,12 +275,12 @@
 					<ul class="clearfix">
 						<li>
 							<div class="list-link">
-								<a class="yxjl" href="/hz/mkg/orders.html">游戏记录</a>
+								<a class="yxjl" href="/orders.html">游戏记录</a>
 							</div>
 						</li>
 						<li>
 							<div class="list-link">
-								<a class="tdbb" href="/hz/mkg/dayreport.html">个人报表</a>
+								<a class="tdbb" href="/dayreport.html">个人报表</a>
 							</div>
 						</li>
 <!-- 						<li> -->
@@ -307,19 +290,19 @@
 <!-- 						</li> -->
 						<li>
 							<div class="list-link">
-								<a class="tdbb" href="/hz/mkg/teamreport.html">团队报表</a>
+								<a class="tdbb" href="/teamreport.html">团队报表</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</li>
 			<li class="no-margin">
-				<a class="nav-hongbao" href="/hz/mkg/activity/goIndex.html">
+				<a class="nav-hongbao" href="/activity/goIndex.html">
 					<i></i><span>优惠活动</span>
 				</a>
 			</li>
 			<li class="no-margin">
-				<a class="nav-fund" href="/hz/mkg/statement.html#account_view">
+				<a class="nav-fund" href="/statement.html#account_view">
 					<i></i><span>资金明细</span>
 				</a>
 			</li>
@@ -381,30 +364,16 @@
 </div>
 
       <div>
-        
-
-
-
-
-    
-
-
 <input type="hidden" id="tab_input" value="account">
 <div class="g_33 main clearfix">
-
 	<div class="main-content">
-
 		<div class="nav-bg nav-bg-tab">
 			<div class="title-normal">用户管理</div>
 			<ul class="tab-title clearfix">
-				<li class="current"><a href="/hz/mkg/user/create"><span>精准开户</span></a></li>
-
-				<li><a href="/hz/mkg/user/link/create"><span>链接开户</span></a></li>
-
-				<li><a href="/hz/mkg/user.html"><span>用户列表</span></a></li>
-
-				<li><a href="/hz/mkg/user/link"><span>链接管理</span></a></li>
-
+				<li class="current"><a href="/user/create.html"><span>精准开户</span></a></li>
+				<li><a href="/user/link/create.html"><span>链接开户</span></a></li>
+				<li><a href="/user.html"><span>用户列表</span></a></li>
+				<li><a href="/user/link.html"><span>链接管理</span></a></li>
 			</ul>
 		</div>
 
@@ -417,8 +386,8 @@
 						<i class="item-icon-13"></i>选择账户类型
 					</div>
 					<div class="item-info filter-tabs-cont" id="J-user-type-switch-panel">
-						<a data-userTypeId="0" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-player"></i> <span>会员账号</span></a>
-						<a data-userTypeId="1" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-agent"></i> <span>代理账号</span></a>
+						<a id="J-input-userType" data-userTypeId="0" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-player"></i> <span>会员账号</span></a>
+						<a id="J-input-userType" data-userTypeId="1" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-agent"></i> <span>代理账号</span></a>
 					</div>
 				</div>
 
@@ -522,11 +491,10 @@
 
 		createSelectPoint();
 
-
 		//表单提交
 		submitButton = $('#J-button-submit');
 		submitButton.click(function() {
-			var userType = $.trim($('#J-input-userType').val()) //用户类型
+			var userType = $.trim($('#J-input-userType').attr("data-userTypeId")) //用户类型
 			data.username = $.trim($('#J-input-userName').val()) //有效期
 			data.password = $.trim($('#J-input-password').val()) //有效期
 
@@ -547,9 +515,25 @@
 				return false;
 			}
 
-			data.password = md5(data.password);
-
-			$.post("/hz/mkg/api/agent/create_user",data,function(res){
+			//data.password = md5(data.password);
+			var accountId = localStorage.getItem("id");
+			
+			$.ajax({
+				url:"/agent/create/" + accountId,
+			    type:'POST',
+			    dataType:'JSON',
+			    data:{"userType":userType, "username":data.username, "password":data.password, "point":data.point},
+			    success:function(data){
+			    	if (data.status == 1) {// 登陆成功，跳转到首页
+			    		commonUtil.showTip('创建用户成功！');
+			    	}
+			    },error:function(data){
+			    	commonUtil.showTip('网络异常，请稍后再试！');
+			    }
+			});
+			
+			
+			/* $.post("/hz/mkg/api/agent/create_user",data,function(res){
 				if(res.code == 1){
                     commonUtil.commonTipAlert_f('创建账户成功');
                     var tx = $('.J-quotas');
@@ -559,7 +543,7 @@
 					typeof thisfuckingmsg == 'undefined' ? thisfuckingmsg = res.Msg : !0;
                     commonUtil.showTip('创建链接失败，' + thisfuckingmsg + '');
 				}
-			});
+			}); */
 		})
 	});
 

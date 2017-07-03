@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.manager.AccountManager;
 import com.project.util.HttpServletUtil;
+import com.project.util.Md5;
 
 /**
  * 代理商
@@ -34,13 +35,14 @@ public class AgentController {
 	public String create(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
-		String payeeName = accountManager.getPayeeName(accountId);
-		String name = "";
-		if (payeeName != null && "".equals(payeeName)) {
-			name = payeeName.split("")[1] + "**";
-		}
+		String userType = request.getParameter("userType");// 用户类型
+		String name = request.getParameter("username");// 用户名
+		String password = request.getParameter("password");// 密码
+		String point = request.getParameter("point");// 返点
+
+		int result = accountManager.createAgent(name, Md5.crypt(password), point, userType, accountId);
 		
-		return HttpServletUtil.getResponseJsonData(1, name, "success");
+		return HttpServletUtil.getResponseJsonData(result, name, "success");
 	}
 	
 	/**
