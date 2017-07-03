@@ -1,11 +1,9 @@
 package com.project.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,7 +185,7 @@ public class AccountController {
 		}
 		
 		return HttpServletUtil.getResponseJsonData(1, name, "success");
-		
-		
 	}
+	
+	
 }
