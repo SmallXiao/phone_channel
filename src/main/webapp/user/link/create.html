@@ -152,11 +152,11 @@
 							<i></i>
 							<span>资金密码</span>
 						</a>
-						<a href="/users/personal" class="tul-link3">
+						<a href="/users/personal.html" class="tul-link3">
 							<i></i>
 							<span>修改资料</span>
 						</a>
-						<a href="/users/user-bankards" class="tul-link4">
+						<a href="/users/user-bankards.html" class="tul-link4">
 							<i></i>
 							<span>银行卡</span>
 						</a>
@@ -509,7 +509,7 @@ $('.user-type-icon-agent').parent().click();
 				return false;
 			}
 
-			$.post("/hz/mkg/api/agent/create_link",data,function(res){
+			$.post("/api/agent/create_link",data,function(res){
 				if(res.code==1){
                     commonUtil.commonTipAlert_f('创建链接成功');
 				}else{

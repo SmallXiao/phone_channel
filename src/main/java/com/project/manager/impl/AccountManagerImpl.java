@@ -57,7 +57,6 @@ public class AccountManagerImpl implements AccountManager {
 	public int bindingBank(String accountId, String payeeName,
 			String cardNumber, String bankAllas, String province, String city,
 			String place) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -67,4 +66,14 @@ public class AccountManagerImpl implements AccountManager {
 		return accountMapper.createAgent(name, password, point, userType, parentId, currentTime);
 	}
 
+	@Override
+	public String getlongUrl(String shortUrl) {
+		return accountMapper.getlongUrl(shortUrl);
+	}
+
+	@Override
+	public int createLink(String shortUrl, String url, String accountId) {
+		long currentTime = System.currentTimeMillis() / 1000;
+		return accountMapper.createLink(shortUrl, url, accountId, currentTime);
+	}
 }

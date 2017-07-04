@@ -25,6 +25,10 @@ public interface AccountMapper {
 	
 	public int createAgent(@Param("name")String name, @Param("password")String password, @Param("point")String point, 
 			@Param("type")String userType, @Param("parentId")String parentId, @Param("time")long time);
-	
+
+	public String getlongUrl(@Param("shortUrl") String shortUrl);
+
+	public int createLink(@Param("shortUrl") String shortUrl, @Param("longUrl") String longUrl, 
+			@Param("accountId") String accountId, @Param("time") long time);
 
 }
