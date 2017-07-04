@@ -70,14 +70,9 @@ public class AgentController {
 		String url = "register.html?";
 		String shortUrl = CommonUtil.shortUrl(url);
 
-		accountManager.create
-		String payeeName = accountManager.getPayeeName(accountId);
-		String name = "";
-		if (payeeName != null && "".equals(payeeName)) {
-			name = payeeName.split("")[1] + "**";
-		}
+		accountManager.createLink(shortUrl, shortUrl, accountId);
 
-		return HttpServletUtil.getResponseJsonData(1, name, "success");
+		return HttpServletUtil.getResponseJsonData(1, "success");
 	}
 
 	/**
