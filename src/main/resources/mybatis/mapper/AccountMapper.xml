@@ -39,5 +39,14 @@
 	
 	</insert>
 
+	<select id="getUrl" parameterType="java.lang.String" resultType="Url">
+		SELECT * FROM url WHERE short_url=#{shortUrl};
+	</select>
+
+	<insert id="createLink" parameterType="java.lang.String">
+		INSERT INTO url(create_date,short_url,long_url,user_type,point,valid_date,account_id,create_time,update_time)
+			VALUES(#{createDate},#{shortUrl},#{longUrl},#{userType},#{point},#{validDate},#{accountId},#{time},#{time});
+	</insert>
+	
 	
 </mapper>
