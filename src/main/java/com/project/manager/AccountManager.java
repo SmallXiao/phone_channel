@@ -1,5 +1,7 @@
 package com.project.manager;
 
+import com.project.entity.Url;
+
 public interface AccountManager {
 
 	/**
@@ -42,7 +44,7 @@ public interface AccountManager {
 	 * @param parentId
 	 * @return
 	 */
-	public int createAgent(String name, String password, String point, String userType, String parentId);
+	public int createAgent(String name, String password, String point, String userType, int parentId);
 
 
 	/**
@@ -50,8 +52,9 @@ public interface AccountManager {
 	 * @param shortUrl		短链接
 	 * @return
 	 */
-	public String getlongUrl(String shortUrl);
+	public Url getUrl(String shortUrl);
 	
-	public int createLink(String shortUrl, String url, String accountId);
+	public int createLink(String shortUrl, String url, String userType, String point, String validDate,
+						  String accountId);
 
 }

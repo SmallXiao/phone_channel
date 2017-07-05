@@ -38,7 +38,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String register(HttpServletRequest request, HttpServletResponse response) {
+	private final String register(HttpServletRequest request, HttpServletResponse response) {
 		HttpServletUtil.initResponse(response);
 		String accountName = request.getParameter("accountName");
 		String password = request.getParameter("password");
@@ -56,13 +56,12 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	@ResponseBody
-	public String login(HttpServletRequest request, HttpServletResponse response) {
+	private final String login(HttpServletRequest request, HttpServletResponse response) {
 		HttpServletUtil.initResponse(response);
 		String accountName = request.getParameter("accountName");
 		String password = request.getParameter("password");
 		String accountId = accountManager.login(accountName, Md5.crypt(password));
 		LOG.trace(String.format("accountName：%s，password：%s，count：%s", accountName, password, accountId));
-		
 		
 		return HttpServletUtil.getResponseJsonData(1, accountId, "success");
 	}
@@ -75,7 +74,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/password/{accountId}", method = RequestMethod.POST)
 	@ResponseBody
-	public String changePassword(HttpServletRequest request, HttpServletResponse response,
+	private final String changePassword(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId, @RequestParam("password") String password,
 			@RequestParam("newPassword") String newPassword) {
 		HttpServletUtil.initResponse(response);
@@ -93,7 +92,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/payPassword/{accountId}", method = RequestMethod.POST)
 	@ResponseBody
-	public String changePayPassword(HttpServletRequest request, HttpServletResponse response, 
+	private final String changePayPassword(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		LOG.trace("accountId：" + accountId);
 		
@@ -114,7 +113,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/payeeName/{accountId}", method = RequestMethod.POST)
 	@ResponseBody
-	public String changePayeeName(HttpServletRequest request, HttpServletResponse response,
+	private final String changePayeeName(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		String payeeName = request.getParameter("payeeName");// 收款人姓名
@@ -132,7 +131,7 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping(value="/bindingBack/{accountId}", method = RequestMethod.POST)
-	public String bindingBank(HttpServletRequest request, HttpServletResponse response,
+	private final String bindingBank(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		
@@ -154,7 +153,7 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping(value="/bankards/{accountId}", method = RequestMethod.GET)
-	public String bankards(HttpServletRequest request, HttpServletResponse response,
+	private final String bankards(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		
@@ -175,7 +174,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/payeeName/{accountId}", method = RequestMethod.GET)
 	@ResponseBody
-	public String payeeName(HttpServletRequest request, HttpServletResponse response,
+	private final String payeeName(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		String payeeName = accountManager.getPayeeName(accountId);

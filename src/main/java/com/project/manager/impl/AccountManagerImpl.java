@@ -1,10 +1,18 @@
 package com.project.manager.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import com.project.util.DateUtils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.entity.Url;
 import com.project.manager.AccountManager;
 import com.project.mapper.AccountMapper;
 
@@ -16,64 +24,77 @@ public class AccountManagerImpl implements AccountManager {
 	@Autowired
 	private AccountMapper accountMapper;
 
-	@Override
 	public void register(String accountName, String password) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		accountMapper.register(accountName, password, currentTime);
 	}
 
-	@Override
 	public String login(String accountName, String password) {
 
 		return accountMapper.login(accountName, password);
 	}
 
-	@Override
 	public int changePassword(String accountId, String password, String newPassword) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		return accountMapper.changePassword(accountId, password, newPassword, currentTime);
 		
 	}
 
-	@Override
 	public int changePayPassword(String accountId, String oldPayPassword, String payPassword) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		return accountMapper.changePayPassword(accountId, oldPayPassword, payPassword, currentTime);
 		
 	}
 
-	@Override
 	public int changePayeeName(String accountId, String payeeName) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		return accountMapper.changePayeeName(accountId, payeeName, currentTime);
 	}
 
-	@Override
 	public String getPayeeName(String accountId) {
 		return accountMapper.getPayeeName(accountId);
 	}
 
-	@Override
 	public int bindingBank(String accountId, String payeeName,
 			String cardNumber, String bankAllas, String province, String city,
 			String place) {
 		return 0;
 	}
 
-	@Override
-	public int createAgent(String name, String password, String point, String userType, String parentId) {
+	public int createAgent(String name, String password, String point, String userType, int parentId) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		return accountMapper.createAgent(name, password, point, userType, parentId, currentTime);
 	}
 
-	@Override
-	public String getlongUrl(String shortUrl) {
-		return accountMapper.getlongUrl(shortUrl);
+	public Url getUrl(String shortUrl) {
+		Url url = accountMapper.getUrl(shortUrl);
+		if (url != null) {
+			int currentDate = DateUtils.getYYYYMMDD();
+			
+			int createDate = url.getCreate_date();
+			int validDays = url.getValid_days();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			Calendar createCalendar = new GregorianCalendar();
+			try {
+				createCalendar.setTime(sdf.parse(String.valueOf(createDate)));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			createCalendar.add(Calendar.DAY_OF_MONTH, validDays);
+			int date = DateUtils.getYYYYMMDD(createCalendar.getTime());
+			
+			if (currentDate <= date) {// 当前日期在有效日期内，返回url
+				return url;
+			}
+		}
+		return null;
 	}
 
-	@Override
-	public int createLink(String shortUrl, String url, String accountId) {
+	public int createLink(String shortUrl, String url, String userType, String point,
+						  String validDate, String accountId) {
 		long currentTime = System.currentTimeMillis() / 1000;
-		return accountMapper.createLink(shortUrl, url, accountId, currentTime);
+		int createDate = DateUtils.getYYYYMMDD();
+		return accountMapper.createLink(shortUrl, url, userType, point, createDate, validDate, accountId, currentTime);
 	}
+
 }

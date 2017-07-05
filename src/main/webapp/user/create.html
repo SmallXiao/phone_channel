@@ -552,7 +552,7 @@
 
 			//data.password = md5(data.password);
 			var accountId = localStorage.getItem("id");
-			
+			// 创建代理下的子帐号
 			$.ajax({
 				url:"/agent/create/" + accountId,
 			    type:'POST',

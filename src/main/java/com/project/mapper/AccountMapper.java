@@ -2,6 +2,8 @@ package com.project.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.project.entity.Url;
+
 
 public interface AccountMapper {
 	
@@ -24,11 +26,13 @@ public interface AccountMapper {
 	public String getPayeeName(@Param("id") String accountId);
 	
 	public int createAgent(@Param("name")String name, @Param("password")String password, @Param("point")String point, 
-			@Param("type")String userType, @Param("parentId")String parentId, @Param("time")long time);
+			@Param("type")String userType, @Param("parentId")int parentId, @Param("time")long time);
 
-	public String getlongUrl(@Param("shortUrl") String shortUrl);
+	public Url getUrl(@Param("shortUrl") String shortUrl);
 
-	public int createLink(@Param("shortUrl") String shortUrl, @Param("longUrl") String longUrl, 
-			@Param("accountId") String accountId, @Param("time") long time);
+	public int createLink(@Param("shortUrl") String shortUrl, @Param("longUrl") String longUrl,
+						  @Param("userType") String userType, @Param("point") String point,
+						  @Param("createDate") int createDate, @Param("validDate") String validDate,
+						  @Param("accountId") String accountId, @Param("time") long time);
 
 }
