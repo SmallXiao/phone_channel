@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<base href="">
+	<title>注册平台账号.</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, height=device-height, user-scalable=yes" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="注册页面">
+    <meta content="width=device-width, height=device-height, user-scalable=yes" name="viewport">
+	<link rel="icon" href="/favicon.ico" />
+	<link media="all" type="text/css" rel="stylesheet" href="/static/styles/reg.css" >
+    <link media="all" type="text/css" rel="stylesheet" href="/assets/css/exclusive.css" >
+	<script src="/static/mobile/js/libs/jquery-1.9.1.min.js"></script>
+	<script src="/static/scripts/vendor/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="/static/scripts/vendor/additional-methods.js" type="text/javascript"></script>
+	<script src="/static/scripts/vendor/messages_bs_zh.js" type="text/javascript"></script>
+	<script src="/static/scripts/vendor/md5.js" ></script>
+	<script src="/static/scripts/vendor/jBox.min.js" ></script>
+	<script src="/static/scripts/3a.util.js" ></script>
+	<script>var ctx = "/hz";</script>
+</head>
+<body>
+    <div class="response-wrap">
+<div class="top-box" id="J_topBox">
+    <div class="logo-box"><img src="/static/theme/db2/images/logo.png" style="margin-top:15px;"/> </div>
+    <!-- <div class="right-box"><a href="#">联系代理</a></div> -->
+</div>
+
+<div class="center-box" id="J_centerBox">
+    <form id="registerForm" autocomplete="off"><!-- action="/agent/register" method="post" --> 
+    <input type="hidden" name="fuin" value="10961" />
+    <input type="hidden" name="registerLinkId" value="2900" />
+    <input type="hidden" id="passwordSecurity" name="passwordSecurity" value=""/>
+    <div class="register-box">
+        <p class="title-box">注 册 会 员</p>
+        <div class="item" data-action="account">
+            <label>登录账号</label>
+            <div class="input-item">
+                <input type="text" tabindex="1"  id="userName" class="input" name="cn" value="" placeholder="必须字母和数字组合，只能字母开头，5~10位" readonly onfocus="this.removeAttribute('readonly')" onfocusin="this.removeAttribute('readonly')"/>
+            </div>
+			<p class="inner_help" style="float: left;margin-left: 85px;margin-bottom: 4px;color: #9e9b9b;">提示：登录账号必须字母和数字组合，只能字母开头，长度5到10位，不支持特殊字符，示例：test1234</p>
+        </div>
+        <div class="item" data-action="account">
+            <label>登录密码</label>
+            <div class="input-item">
+                <input type="password" name="password" tabindex="2" id="password" class="input"  placeholder="密码必须字母和数字组合，长度5到10位" readonly onfocus="this.removeAttribute('readonly')" onfocusin="this.removeAttribute('readonly')" value="">
+            </div>
+			<p class="inner_help" style="float: left;margin-left: 85px;margin-bottom: 4px;color: #9e9b9b;">提示：密码必须字母和数字组合，长度5到10位，不支持特殊字符,示例：1234aswq</p>
+        </div>
+        <div class="item" data-action="account">
+            <label>确认密码</label>
+            <div class="input-item">
+                <input placeholder="请再次输入密码" type="password" tabindex="3" class="input" id="confirm_password" name="confirm_password" />
+            </div>
+        </div>
+        <div class="item item-yzm" data-action="account">
+            <label>验证码</label>
+            <div class="input-item">
+                <input type="text" tabindex="5" id="imageCode" name="authCode" class="input"  placeholder="五位数字"/>
+            </div>
+            <a class="verify" onclick="refreshImageCode();" title="点击图片刷新验证码">
+            <img id="image" class="reg-img-vcode" onclick="refreshImageCode();" src="/hz/imageCode"/></a>
+        </div>
+        <button type="button" height='50px' class="btn-item" tabindex="6"  onclick="register()" id="J-button-submit" >提交注册信息</button>
+    </div>
+    </form>
+</div>
+<div class="login-bottom" id="J_bottomBox">
+    <div class="left-con">
+        <ul class="clearfix">
+            <li>
+                <p></p>
+            </li>
+        </ul>
+    </div>
+    <div class="right-con">
+        <p>
+          <a class="help help_side pd" href="/static/help.html#30">关于我们</a>
+          <a class="help help_side" href="/static/help.html#3">常见问题</a>
+          <a class="help help_side" href="/static/help.html#29">条款规定</a>
+          <!-- <a class="help" target="_blank" href="/brandIntroduction.html">品牌介绍</a> -->
+        </p>
+        
+    </div>
+</div>
+    </div>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+    if (commonUtil.versions.mobile || commonUtil.versions.ios || commonUtil.versions.android || commonUtil.versions.iPhone || commonUtil.versions.iPad) {
+    //window.onload = window.onresize = function () {
+    commonUtil.viewPortSet();
+    //}
+    }
+    commonUtil.setRegisterHeight();
+    $(window).resize(function(){
+        commonUtil.setRegisterHeight();
+    });
+    $("input").focus(function(){
+        $(this).parents(".input-item").addClass("on");
+    });
+    $("input").blur(function(){
+        $(this).parents(".input-item").removeClass("on");
+    });
+   refreshImageCode();
+   var dateTime = new Date();
+   dateTime = dateTime.getTime();
+   $("#registerForm").validate({
+		rules:{
+			cn:{required:true,sobet_username:true,remote: {
+			    url: "/hz/userInfo/checkUserNameForRegister",
+			    type: "post",               //数据发送方式
+			    dataType: "text",           //接受数据格式
+			    data: {                     //要传递的数据
+			        userName: function() {
+			            return $("#userName").val();
+			        }
+			    }
+			}},
+			password:{required:true,sobet_password:true},
+			confirm_password: {
+			    required: true,
+			    sobet_password:true,
+			    equalTo: "#password"
+			},
+			authCode:{required:true,remote: {
+			    url: "/hz/validateImageCode",
+			    type: "post",               //数据发送方式
+			    dataType: "text",           //接受数据格式
+			    data: {                     //要传递的数据
+			        imageCode: function() {
+			            return $("#imageCode").val();
+			        }
+			    }
+			}}
+		},
+		messages:{
+			cn:{required:"请输入用户名", sobet_username:'请输入正确的用户名'},
+			password:{required:"请输入密码",sobet_password:"8~16位，包含数字、字母"},
+			confirm_password:{required:"请输入密码",sobet_password:"8~16位，包含数字、字母",equalTo:"两次密码输入不一致"},
+			authCode:{required:"请输入验证码"}
+		},
+		errorPlacement: function(error, element) {
+      element.parent().parent().append(error);
+		},
+		submitHandler:function(form){
+		    $('.btn').addClass('loading').val('操作中…');
+	  		var pwdval = md5($('#password').val());
+		  	$('#password,#confirm_password').val(pwdval);
+		  	form.submit();
+		},
+    });
+ });
+
+function refreshImageCode(){
+	document.getElementById('image').src='/hz/imageCode?date='+new Date();
+	$('#imageCode').val('');
+}
+
+function register() {
+	var data = {};
+	data.userName = $("#userName").val();
+	data.password = $("#password").val();
+	//data.point = getUrlParam('point');
+	//data.type = getUrlParam("userType");
+	//data.id = localStorage.getItem("id");
+	var url = window.location.href;
+	var shortUrl = url.split("/")[4];
+	alert(11);
+	/* alert(data.userName);
+	alert(data.password);
+	alert(data.point);
+	alert(data.type);
+	alert(data.id); */
+	$.post("/agent/register/"+shortUrl,data,function(res){
+		console.log(res);
+		if(res.code==1){
+            commonUtil.commonTipAlert_f('创建链接成功');
+		}else{
+			var thisfuckingmsg = res.msg;
+			typeof thisfuckingmsg == 'undefined' ? thisfuckingmsg = res.Msg : !0;
+            commonUtil.showTip('创建链接失败，' + thisfuckingmsg + '');
+		}
+	});
+	
+}
+
+</script>
+</html>
