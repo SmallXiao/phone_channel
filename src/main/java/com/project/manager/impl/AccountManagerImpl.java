@@ -90,11 +90,11 @@ public class AccountManagerImpl implements AccountManager {
 		return null;
 	}
 
-	public int createLink(String shortUrl, String url, String userType, String point,
-						  String validDate, String accountId) {
+	public int createLink(String shortUrl, String userType, String point,
+						  String validDays, int accountId) {
 		long currentTime = System.currentTimeMillis() / 1000;
 		int createDate = DateUtils.getYYYYMMDD();
-		return accountMapper.createLink(shortUrl, url, userType, point, createDate, validDate, accountId, currentTime);
+		return accountMapper.createLink(shortUrl, userType, point, createDate, validDays, accountId, currentTime);
 	}
 
 }

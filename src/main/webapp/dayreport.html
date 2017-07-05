@@ -129,40 +129,53 @@
 
     });
   </script>
+  <!-- build:js /static/scripts/vendor-top.min.js -->
+  <!--<script src="/assets/js/dsgame.base.js"></script>
+  <script src="/assets/js/dsgame.DatePicker.js"></script>
+  <script src="/assets/js/dsgame.Select.js"></script>
+  <script src="/assets/js/jquery.mousewheel.min.js"></script>-->
+  <!-- endbuild -->
 </head>
 <body>
   <div class="response-wrap">
+    
+
+
 <div id="header" class="wrap">
 	<div class="wrap-inner">
 		<div class="left top-nav">
 			<!-- 用户中心 -->
 			<div class="top-nav-user">
 				<em>欢迎您,&nbsp;&nbsp;</em>
-				<a href="/users/user.html" class="top-nav-toggle" data-overdropdown="handler">
+				<a href="/hz/mkg/users/user" class="top-nav-toggle" data-overdropdown="handler">
 					<span data-user-name>zx19926276</span>
 					<i class="caret"></i>
 				</a>
 				<div class="top-nav-menu" data-overdropdown="dropdown">
 					<div class="top-user-links clearfix">
-						<a href="/users/change-password.html" class="tul-link1">
+						<a href="/hz/mkg/users/change-password.html" class="tul-link1">
 							<i></i>
 							<span>登录密码</span>
 						</a>
-						<a href="/users/change-fund-password.html" class="tul-link2">
+						<a href="/hz/mkg/users/change-fund-password.html" class="tul-link2">
 							<i></i>
 							<span>资金密码</span>
 						</a>
-						<a href="/users/personal.html" class="tul-link3">
+						<a href="/hz/mkg/users/personal" class="tul-link3">
 							<i></i>
 							<span>修改资料</span>
 						</a>
-						<a href="/users/user-bankards.html" class="tul-link4">
+						<a href="/hz/mkg/users/user-bankards" class="tul-link4">
 							<i></i>
 							<span>银行卡</span>
 						</a>
 					</div>
 				</div>
 				<a class="highlight-color" href="javascript:;">退出</a>
+				<a class="li-line">|</a>
+				<a href="/hz/mkg/message/go">站内信</a>
+				<i class="msg-tip"></i>
+				</a>
 			</div>
 		</div>
 		<div class="right">
@@ -184,24 +197,28 @@
 					<span class="balance-toggle highlight-color">隐藏</span>
 				</li>
 				<li class="top-account-deposit">
-					<a href="/users/deposit.html">
+					<a href="/hz/mkg/users/deposit.html">
 						<i></i>
 						<span>充值</span>
 					</a>
 				</li>
 				<li class="top-account-withdraw">
-					<a href="/qukuan">
+					<a href="/hz/mkg/qukuan">
 						<i></i>
 						<span>提款</span>
 					</a>
 				</li>
 				<li class="top-account-transfer">
-					<a href="/pay/goTransfer">
+					<a href="/hz/mkg/pay/goTransfer">
 						<i></i>
 						<span>平台转账</span>
 						<li class="deposit-record">
-							<a href="/statement.html#recharge_view">
+							<a href="/hz/mkg/statement.html#recharge_view">
 								<span class="opacity-60">充值记录</span>
+								<span class="li-line">|</span>
+								<li class="top-account-gm">
+									<a class="opacity-60" data-call-center href="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=819082&configID=64920&jid=6634132239&s=1" target="_blank">多宝2客服</a>
+								</li>
 							</a>
 						</li>
 			</ul>
@@ -219,6 +236,11 @@
 		<a href="/hz/home" class="left" id="logo">多宝2游戏</a>
 		<span class="logo-diff">多宝2游戏</span>
 		<ul class="nav-content right">
+			<!--<li>
+				<a class="nav-home" href="/hz/home">
+					<i></i><span>首页</span>
+				</a>
+			</li>-->
 			<li data-gamelist>
 				<a class="nav-lobby" id="lottery-menu" href="javascript:;">
 					<i></i><span>彩票中心</span>
@@ -249,12 +271,12 @@
 					<ul class="clearfix">
 						<li>
 							<div class="list-link">
-								<a class="grgl" href="/users/change-password.html">个人管理</a>
+								<a class="grgl" href="/hz/mkg/users/change-password.html">个人管理</a>
 							</div>
 						</li>
 						<li>
 							<div class="list-link">
-								<a class="tdgl" href="/user.html">团队管理</a>
+								<a class="tdgl" href="/hz/mkg/user.html">团队管理</a>
 							</div>
 						</li>
 					</ul>
@@ -270,29 +292,34 @@
 					<ul class="clearfix">
 						<li>
 							<div class="list-link">
-								<a class="yxjl" href="/orders.html">游戏记录</a>
+								<a class="yxjl" href="/hz/mkg/orders.html">游戏记录</a>
 							</div>
 						</li>
 						<li>
 							<div class="list-link">
-								<a class="tdbb" href="/dayreport.html">个人报表</a>
+								<a class="tdbb" href="/hz/mkg/dayreport.html">个人报表</a>
 							</div>
 						</li>
+<!-- 						<li> -->
+<!-- 							<div class="list-link"> -->
+
+<!-- 							</div> -->
+<!-- 						</li> -->
 						<li>
 							<div class="list-link">
-								<a class="tdbb" href="/teamreport.html">团队报表</a>
+								<a class="tdbb" href="/hz/mkg/teamreport.html">团队报表</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</li>
 			<li class="no-margin">
-				<a class="nav-hongbao" href="/activity/goIndex.html">
+				<a class="nav-hongbao" href="/hz/mkg/activity/goIndex.html">
 					<i></i><span>优惠活动</span>
 				</a>
 			</li>
 			<li class="no-margin">
-				<a class="nav-fund" href="/statement.html#account_view">
+				<a class="nav-fund" href="/hz/mkg/statement.html#account_view">
 					<i></i><span>资金明细</span>
 				</a>
 			</li>
@@ -354,232 +381,142 @@
 </div>
 
       <div>
-<input type="hidden" id="tab_input" value="account">
+        
 
+
+<input type="hidden" id="tab_input" value="form">
 <div class="g_33 main clearfix">
-
-	<div class="main-content">
-
-		<div class="nav-bg nav-bg-tab">
-			<div class="title-normal">用户管理</div>
-			<ul class="tab-title clearfix">
-				<li><a href="/user/create.html"><span>精准开户</span></a></li>
-
-				<li class="current"><a href="/user/link/create.html"><span>链接开户</span></a></li>
-
-				<li><a href="/user.html"><span>用户列表</span></a></li>
-
-				<li><a href="/user/link.html"><span>链接管理</span></a></li>
-			</ul>
-		</div>
-
-		<div id="J-form">
-			<input type="hidden" name="_token" value="H74e1aunkodPF3BPZyHdXywYe6jgyfPiP4rKIjpL" /> <input type="hidden" name="is_agent" id="J-input-userType" value="0" /> <input type="hidden" name="prize_group_id" id="J-input-groupid" value="" /> <input type="hidden" id="J-input-prize" value=""> <input
-				type="hidden" name="prize_group_type" id="J-input-group-type" value="1" /> <input type="hidden" name="agent_prize_set_quota" id="J-agent-quota-limit-json" value="" />
-
-			<div class="content link-create-wrap" id="J-panel-cont">
-
-				<div class="item-detail user-type-choose">
-					<div class="item-title">
-						<i class="item-icon-13"></i>选择账户类型
-					</div>
-					<div class="item-info filter-tabs-cont" id="J-user-type-switch-panel">
-						<a data-userTypeId="0" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-player"></i> <span>会员账号</span>
-						</a> <a data-userTypeId="1" href="javascript:void(0);" class="user-type-icons"> <i class="user-type-icon-agent"></i> <span>代理账号</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="item-detail user-info-config">
-					<div class="item-title">
-						<i class="item-icon-9"></i>设置用户账号信息
-					</div>
-					<div class="item-info">
-						<p>
-							<label>链接有效期：</label> <select id="J-select-link-valid" style="display: none;" name="valid_days" onchange="selectLinkChange()">
-								<option value="">请选择</option>
-								<option value="1">1天</option>
-								<option value="7">7天</option>
-								<option value="30">30天</option>
-								<option value="90">90天</option>
-								<option value="-1">永久</option>
-							</select>
-						</p>
-					</div>
-				</div>
-
-				<div class="item-detail user-bonus-choose">
-					<div class="item-title">
-						<i class="item-icon-4"></i>配置用户返点
-					</div>
-					<div class="item-title">
-						<select id="J-select-link-point" name="link_point">
-							<option value="">请选择</option>
-						</select>
-					</div>
-
-				</div>
-
-				<div class="bonus-config-result">
-					<strong>账号设置结果：</strong><label>有效期<span class="J-user-time">----</span></label>
-					<label>账户类型<span class="J-user-type">----</span></label>
-					<label>奖金组<span class="J-init-bonusgroup"></span></label>
-					<label>返点：<span id="J-rebate-point-text" class="J-rebates-average">----</span></label>
-					<label>配额<span class="J-quotas">--</span></label>
-				</div>
-
-				<div class="row-lastsubmit">
-					<input type="button" class="btn btn-important" value="生成链接" id="J-button-submit" />
-				</div>
-
+    <div class="main-content">
+        <div class="nav-bg nav-bg-tab">
+            <div class="title-normal">报表查询</div>
+            <ul class="tab-title">
+				<li class="current" data-tab-single><a data-skey="single" href="/hz/mkg/dayreport.html"><span>个人报表</span></a></li>                
+				<!--<li data-tab-team><a data-skey="team" href="/hz/mkg/teamreport.html"><span>团队报表</span></a></li>-->
+				<li data-tab-team><a data-skey="team" href="/hz/mkg/teamreport.html"><span>团队报表</span></a></li>
+				<li data-tab-salary><a data-skey="salary" href="/hz/mkg/dayreport.html#salary_view"><span>日工资</span></a></li>
+                <li data-tab-dividend><a data-skey="dividend" href="/hz/mkg/dayreport.html#dividend_view"><span>分红</span></a></li>
+                <li data-tab-general><a data-skey="general" href="/hz/mkg/general"><span>团队总览</span></a></li>
+                <li data-tab-thirdteam><a data-skey="thirdteam" href="/hz/mkg/dayreport.html#thirdteam_view"><span>第三方团队报表</span></a></li>
+            </ul>
+        </div>
+        <div class="area-search">
+            <form action="#" class="form-inline" method="get">
+                <input type="hidden" name="_token" value="L5JnAqoMYuxsUprTlju7glk0FImTumOaJTJVpIPk" />
+                <p class="row">
+                    游戏时间： <input id="J-date-start" class="input personal w-3" type="text" name="bought_at_from" value="2017-06-30" /> 至 <input id="J-date-end" class="input personal w-3" type="text" name="bought_at_to" value="2017-07-01" rel="2017-07-01" /> &nbsp;&nbsp;
+                    <select id="J-select-queryType-single" style="display: none;">
+					<option value="0">查询自身</option><option value="1">查询下级</option>
+					</select> &nbsp;&nbsp;用户名：
+                    <input class="input w-2" type="text" value="" name="username" id="J-name" /> &nbsp;&nbsp;
+					平台：
+					<select id="J-select-queryGame">
+						<option value="0">全部</option>
+						<option value="1">AG平台</option>
+						<option value="2">PT平台</option>
+						<option value="3">沙巴平台</option>
+					</select>
+                    <input type="button" value="搜 索" class="btn btn-important" id="J-submit">
+                </p>
+            </form>
+        </div>
+        <div id='single' class="content clearfix">
+            <table width="100%" class="table" id="J-table">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>日期</th>
+                        <th>充值金额</th>
+                        <th>提现金额</th>
+                        <th>有效投注额</th>
+                        <th>返奖金额</th>
+                        <th>返点金额</th>
+                        <th>活动金额</th>
+                        <th>总盈亏</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTable"></tbody>
+            </table>
+            <div id="pagination-container-single" class="pagination-container"></div>
+        </div>
+		<div id="dividend" class="content clearfix" style="display:none;">
+			<div class="clearfix">
+				<table width="49%" id="dividend-details" border="0" cellspacing="0" cellpadding="0" style="float:left;">
+				  <tr class="top">
+					<td colspan="2" align="center">上期分红信息</td>
+				  </tr>
+				  <!--<tr class="top"><td style="width:25%">分红明细(第<span class="lastissue"></span>期)</td><td style="width:25%">彩票分红</td></tr>-->
+				  <tr><td style="width:50%">分红开始时间</td><td><label class="startDay">-</label></td></tr>
+				  <tr><td>分红结束时间</td><td><label class="endDay">-</label></td></tr>
+				  <tr><td>分红比例</td><td><label class="percent hand">-</label></td></tr>
+				  <tr><td>团队盈亏金额</td><td><label class="profitAmount">-</label></td></tr>
+				  <tr><td>应得分红</td><td><label class="deservedBonus">-</label></td></tr>
+				  <tr><td>已收到分红</td><td><label class="receivedBonus">-</label></td></tr>
+				  <!--<tr><td>分红次数</td><td></td></tr>-->
+				</table>
+				<table width="49%" id="paifa-details" style="float:right;" border="0" cellspacing="0" cellpadding="0">
+				  <tr class="top">
+					<td colspan="2" align="center">派发分红信息</td>
+				  </tr>
+				  <tr><td style="width:50%">应派发分红</td><td><label class="shouleDistributBonus">-</label></td></tr>
+				  <tr><td>已派发分红</td><td><label class="alreadyDistributBonus">-</label></td></tr>
+				  <tr><td>未派发分红</td><td><label class="yetDistributBonus">-</label>&nbsp;&nbsp;<a id="sendBonus" style="display:none;" class="btn">派发分红</a></td></tr>
+				</table>
 			</div>
-
+			<div class="clearfix" style="height:40px;background-color: #ebebeb;padding-top: 9px;padding-left: 10px;">日期：<input type="text" name="" class="input w-3" id="startInner" value="" /> 至 <input type="text" name="" class="input w-3" value="" id="endInner"/> &nbsp;&nbsp;用户名：<input class="input w-2" type="text" value="" name="username" id="J-inner-name"> <input type="button" value="搜 索" class="btn btn-important" id="dividendSearch"></div>
+			<table width="100%" class="table" id="J-table-dividend">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>用户名</th>
+                        <!--<th>代理关系</th>-->
+                        <th>分红比例</th>
+                        <th>团队盈亏</th>
+                        <th>分红金额</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTable"></tbody>
+            </table>
+            <div id="pagination-container-dividend" class="pagination-container"></div>
 		</div>
-
-	</div>
+		<div id="salary" class="content clearfix" style="display:none;">
+			<table width="100%" class="table" id="J-table-salary">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>用户名</th>
+                        <!--<th>代理关系</th>-->
+                        <th>日工资比例</th>
+                        <th>团队流水</th>
+                        <th>日工资发放金额</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTable"></tbody>
+            </table>
+            <div id="pagination-container-salary" class="pagination-container"></div>
+		</div>
+		<div id="thirdteam" class="content clearfix" style="display:none;">
+			<table width="100%" class="table" id="J-table-thirdteam">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>转入</th>
+                        <th>转出</th>
+                        <th>消费量</th>
+                        <th>中奖金额</th>
+                        <th>返水</th>
+                        <th>分红</th>
+                        <th>盈亏</th>
+						<th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTable"></tbody>
+            </table>
+            <div id="pagination-container-thirdteam" class="pagination-container"></div>
+		</div>
+    </div>
 </div>
-<div class="pop" id="popWindow" style="display: none;">
-	<div class="pop-hd">
-		<!-- <a href="#" class="pop-close"></a> -->
-		<button type="button" class="pop-close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<h3 class="pop-title">标题</h3>
-	</div>
-	<div class="pop-bd">
-		<div class="pop-content">
-			<i class="ico-success"></i>
-			<p class="pop-text"></p>
-		</div>
-		<div class="pop-btn">
-			<input type="button" value="确 定" class="btn"> <input type="button" value="取 消" class="btn btn-normal">
-		</div>
-	</div>
-</div>
-
-<script>
-require([
-	'jquery','jBox','3a.api','md5','mousewheel','dsgame_base','dsgame_Select','dsgame_Ernie'
-], function() {
-var data = {};
-var quotas = JSON.parse('{"minBounsValue":1956,"baseBounsValue":1700,"minPoint":0.128,"quotaMap":{}}');
-var quotaCount = new Object();
-var selectPoints;
-
-$('.user-type-icons').click(function(){
-	var item = $(this);
-	if(item.hasClass("current")){
-		return;
-	}
-	item.parent().children().removeClass("current");
-	item.addClass("current");
-	data.type = item.data("usertypeid");
-	if(data.type == 1){
-		$('.J-user-type').text("代理用户");
-	}else{
-		$('.J-user-type').text("会员用户");
-	}
-});
-$('.user-type-icon-agent').parent().click();
-
-	// 下拉框组件
-	var selectFun = function() {
-		var selectDays = new dsgame.Select({
-			realDom : '#J-select-link-valid',
-			cls : 'w-2'
-		});
-		selectDays.addEvent('change', function(e, value, text) {
-			data.validDays = selectDays.getValue();
-			$('.J-user-time').text(text);
-		});
-	};
-
-	//加载完成执行方法
-	$(function() {
-		selectFun();
-		createSelectPoint();
-
-		//表单提交
-		$('#J-button-submit').click(function() {
-
-			if(!data.validDays){
-                commonUtil.showTip('请选择有效期');
-				return false;
-			}
-			if(!data.point){
-                commonUtil.showTip('请选择返点');
-				return false;
-			}
-
-			var accountId = localStorage.getItem("id");
-			$.post("/agent/create_link/"+accountId,data,function(res){
-				console.log(res);
-				alert(res);
-				alert(res.status);
-				if(res.status==1){
-                    commonUtil.commonTipAlert_f('创建链接成功');
-				}else{
-					var thisfuckingmsg = res.msg;
-					typeof thisfuckingmsg == 'undefined' ? thisfuckingmsg = res.Msg : !0;
-                    commonUtil.showTip('创建链接失败，' + thisfuckingmsg + '');
-				}
-			},"json");
-		})
-	});
-
-	function createSelectPoint(){
-		var minPoint = quotas.minPoint;
-		var select = $('#J-select-link-point');
-		var pointText = $("#J-rebate-point-text");
-		var p = minPoint * 1000;
-		for(var i =p ;i>=0; i--){
-			var percent = (i/10).toFixed(1);
-			var pt = percent +'%';
-
-			var linkQuota = false;
-			var bonus = percent * 20 + quotas.baseBounsValue;
-
-			$.each(quotas.quotaMap,function(index,item){
-				if(bonus <= item.bonusStart && bonus >= item.bonusEnd){
-					quotaCount[pt] =( item.totalCount - (item.useCount === undefined?0:item.useCount));
-					return;
-				}
-			});
-
-			var option = $('<option></option>').val(percent).text(pt);
-			select.append(option);
-		}
-
-		submitButton = $('#J-button-submit');
-
-		select.change(function() {
-			$('.J-rebates-average').text($(this).val());
-			data.point = $(this).val();
-		});
-		selectPoints=new dsgame.Select({
-			realDom : '#J-select-link-point',
-			cls : 'w-2'
-		});
-		selectPoints.addEvent('change', function(e, value, text) {
-			data.point = selectPoints.getValue();
-			pointText.text(text);
-			var bonus = quotas.baseBounsValue + data.point*20;
-			$(".J-init-bonusgroup").text(bonus);
-
-			var availCount = quotaCount[text];
-			if(availCount===undefined){
-				submitButton.removeClass("disable");
-				$('.J-quotas').text('--').removeClass('c-important');
-			}else{
-				$('.J-quotas').text(availCount).addClass('c-important');
-				if(availCount>0){
-					submitButton.removeClass("disable");
-				}else{
-					submitButton.addClass("disable");
-				}
-			}
-		});
-	}
-})
-</script>
 
       </div>
       <div id="template-footer">
@@ -595,6 +532,41 @@ $('.user-type-icon-agent').parent().click();
         </div>
     </div>
 </div>
+<!--BOTTOM INCLUDE DEPARTMENTS JS-->
+<!-- build:js /static/scripts/vendor-bottom.min.js -->
+<!--<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/dsgame.Ernie.js"></script>
+<script src="/assets/js/dsgame.Tip.js"></script>
+<script src="/static/scripts/vendor/jquery.cycle2.min.js"></script>
+<script src="/static/scripts/vendor/jquery.cycle2.scrollVert.min.js"></script>
+<script src="/static/scripts/vendor/jquery.marquee.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/jquery.cookie.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/additional-methods.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/messages_bs_zh.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/md5.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/jBox.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/mricode.pagination.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/jquery.tabslet.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/global.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/clipboard.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/socket.io.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/echarts.common.min.js" type="text/javascript"></script>
+<script src="/static/scripts/vendor/lz-string.min.js" type="text/javascript"></script>-->
+<!-- endbuild -->
+<!--<script src="/assets/js/config.js"></script>
+<script src="/static/scripts/3a.config.js"></script>-->
+<!-- build:js /static/scripts/3a.main.min.js -->
+<!--<script src="/static/scripts/3a.api.js"></script>
+<script src="/static/scripts/3a.util.js"></script>
+<script src="/static/scripts/3a.default.js"></script>
+<script src="/static/scripts/3a.control.js"></script>
+<script src="/static/scripts/3a.speed.js"></script>
+<script src="/static/scripts/3a.page.js"></script>
+<script src="/static/scripts/3a.sound.js"></script>-->
+<!-- endbuild -->
+<!--<script src="/static/scripts/3a.home.js"></script>-->
+<!--BOTTOM INCLUDE DEPARTMENTS JS-->
 
       </div>
   </div>

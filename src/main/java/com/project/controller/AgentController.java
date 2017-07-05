@@ -55,15 +55,15 @@ public class AgentController {
 	@RequestMapping(value="/create_link/{accountId}", method=RequestMethod.POST)
 	@ResponseBody
 	private final String createLink(HttpServletRequest request, HttpServletResponse response,
-						 @PathVariable("accountId") String accountId) {
+						 @PathVariable("accountId") int accountId) {
 		HttpServletUtil.initResponse(response);
 		String userType = request.getParameter("type");// 用户类型（普通会员、代理）
 		String point = request.getParameter("point");// 返点
-		String validDate = request.getParameter("validDays");// 有效期
+		String validDays = request.getParameter("validDays");// 有效期
 		String longUrl = String.format("register.html?userType=%s&point=%s", userType, point);// 长链接
-		String shortUrl = "agent/register/" + CommonUtil.shortUrl(longUrl);// 短链接
+		String shortUrl = CommonUtil.shortUrl(longUrl);// 短链接
 
-		int result = accountManager.createLink(shortUrl, longUrl, userType, point, validDate, accountId);
+		int result = accountManager.createLink(shortUrl, userType, point, validDays, accountId);
 
 		return HttpServletUtil.getResponseJsonData(result, "success");
 	}

@@ -44,8 +44,8 @@
 	</select>
 
 	<insert id="createLink" parameterType="java.lang.String">
-		INSERT INTO url(create_date,short_url,long_url,user_type,point,valid_date,account_id,create_time,update_time)
-			VALUES(#{createDate},#{shortUrl},#{longUrl},#{userType},#{point},#{validDate},#{accountId},#{time},#{time});
+		INSERT INTO url(create_date,short_url,user_type,point,valid_days,account_id,create_time,update_time)
+			VALUES(#{createDate},#{shortUrl},#{userType},#{point},#{validDays},#{accountId},#{time},#{time});
 	</insert>
 	
 	

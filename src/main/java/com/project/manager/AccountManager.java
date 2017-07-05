@@ -54,7 +54,7 @@ public interface AccountManager {
 	 */
 	public Url getUrl(String shortUrl);
 	
-	public int createLink(String shortUrl, String url, String userType, String point, String validDate,
-						  String accountId);
+	public int createLink(String shortUrl, String userType, String point, String validDays,
+						  int accountId);
 
 }
