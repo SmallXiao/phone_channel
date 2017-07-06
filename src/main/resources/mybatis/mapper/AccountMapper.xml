@@ -52,4 +52,9 @@
 		SELECT id,city FROM city WHERE province_id=#{provinceId};
 	</select>
 	
+	<insert id="bindingBank" parameterType="java.lang.String">
+		INSERT INTO bank(account_id,payee_name,card_number,bank_allas,province,city,place,create_time,update_time)
+			VALUES(#{accountId}, #{payeeName}, #{cardNumber}, #{bankAllas}, #{province}, #{city}, #{place}, #{time}, #{time});
+	</insert>
+	
 </mapper>

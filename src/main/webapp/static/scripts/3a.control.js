@@ -62,6 +62,7 @@
             element.parent().addClass('error');
         },
         submitHandler: function(form) {
+        	alert(11);
             $(":submit").addClass("loading").attr("data-value", "clicked");
             var sn = $('#sn').val();
             var bankCardNo = $('#bankCardNo').val();
@@ -77,10 +78,29 @@
                 'city': city,
                 'place': place
             }
-            Api.getBindCardInfo(data, function(e) {
+            alert(111);
+            $.ajax({
+    			url:"/account/bindingBack/" + accountId,
+    		    type:'GET',
+    		    data:data,
+    		    dataType:'JSON',
+    		    success:function(result){
+    		    	if (result.status == 1) {// 绑定银行卡成功
+    					alert("绑定银行卡成功！")
+    		    		
+    		    	} else {
+    		    		alert("网络异常，请重新尝试！");
+    		    	}
+    		    },error:function(result){
+    		    	console.log("网络异常，请重新尝试！");
+    		    }
+    		});
+            
+            
+           /* Api.getBindCardInfo(data, function(e) {
                 bandCardModal.close();
                 commonUtil.commonTipAlert_f(e.Msg);
-            });
+            });*/
         }
     });
     //银行卡信息-城市切换

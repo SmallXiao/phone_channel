@@ -41,5 +41,8 @@ public interface AccountMapper {
 			@Param("accountId") int accountId, @Param("time") long time);
 	
 	public List<Map<String, String>> getCities(@Param("provinceId")String provinceId);
+	
+	public int bindingBank(@Param("accountId") String accountId, @Param("payeeName")String payeeName, @Param("cardNumber")String cardNumber,
+			@Param("bankAllas")String bankAllas, @Param("province")String province, @Param("city")String city, @Param("place")String place, @Param("time")long time);
 
 }

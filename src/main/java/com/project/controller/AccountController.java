@@ -135,13 +135,14 @@ public class AccountController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/bindingBack/{accountId}", method = RequestMethod.POST)
+	@RequestMapping(value="/bindingBank/{accountId}", method = RequestMethod.POST)
+	@ResponseBody
 	private final String bindingBank(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		
-		String payeeName = request.getParameter("payeeName");// 收款人姓名
-		String cardNumber = request.getParameter("cardNumber");// 收款人卡号
+		String payeeName = request.getParameter("sn");// 收款人姓名
+		String cardNumber = request.getParameter("bankCardNo");// 收款人卡号
 		String bankAllas = request.getParameter("bankAllas");// 开户行
 		String province = request.getParameter("province");// 开户省份
 		String city = request.getParameter("city");// 开户城市
