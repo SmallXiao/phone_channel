@@ -1,6 +1,9 @@
 package com.project.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.project.manager.AccountManager;
 import com.project.util.HttpServletUtil;
 import com.project.util.Md5;
@@ -184,6 +189,25 @@ public class AccountController {
 		}
 		
 		return HttpServletUtil.getResponseJsonData(1, name, "success");
+	}
+	
+	/**
+	 * 得到当前省下市数据
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/getcities", method = RequestMethod.GET)
+	@ResponseBody
+	private final String getCities(HttpServletRequest request, HttpServletResponse response) {
+		HttpServletUtil.initResponse(response);
+		String provinceId = request.getParameter("provinceId");
+		
+		List<Map<String, String>> citiesMap = accountManager.getCities(provinceId);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("data", citiesMap);
+		
+		return jsonObject.toJSONString();
 	}
 	
 	

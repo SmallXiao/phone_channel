@@ -93,44 +93,29 @@
         } else {
             city.empty();
             $.ajax({
-    			url:"http://www.da883.com/hz/pay/getcities?provid=" + value,
-//    		    type:'GET',
-    		    dataType:'JSONP',
-    		    jsonp:"callback",
+    			url:"/account/getcities?provinceId=" + value,
+    		    type:'GET',
+    		    dataType:'JSON',
     		    success:function(response){
-    		    	console.log(data);
-    		    	var data = JSON.stringify(response);
-//    		    	console.log(response);
-//    		    	var data = response.callback.data;
-                    var St = "";
+    		    	var data = response.data;
+                	var St = "";
                     for (var i in data) {
                         var t = data[i];
-                        var opt = "<option value=" + t + ">" + t + "</option>";
+                        var opt = "<option value=" + t.id + ">" + t.city + "</option>";
                         St += opt;
                     }
                     city.append(St);
     		    },error:function(response){
-    		    	console.log(data);
-    		    	var data = JSON.stringify(response);
-//    		    	console.log(response);
-    		    	var data = response.data;
-                    var St = "";
-                    for (var i in data) {
-                        var t = data[i];
-                        var opt = "<option value=" + t + ">" + t + "</option>";
-                        St += opt;
-                    }
-                    city.append(St);
     		    	console.log("网络异常，请重新尝试！");
     		    }
     		});
             
-            
-           /* Api.getCities({
-                'provid': value
+            /*Api.getCities({
+                'provinceId': value
             }, function(response) {
             	var data = response.data;
-                var St = "";
+            	alert(data);
+            	var St = "";
                 for (var i in data) {
                     var t = data[i];
                     var opt = "<option value=" + t + ">" + t + "</option>";

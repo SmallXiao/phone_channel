@@ -1,5 +1,8 @@
 package com.project.manager;
 
+import java.util.List;
+import java.util.Map;
+
 import com.project.entity.Url;
 
 public interface AccountManager {
@@ -56,5 +59,12 @@ public interface AccountManager {
 	
 	public int createLink(String shortUrl, String userType, String point, String validDays,
 						  int accountId);
+	
+	/**
+	 * 得到当前省下市数据
+	 * @param provinceId
+	 * @return
+	 */
+	public List<Map<String, String>> getCities(String provinceId);
 
 }

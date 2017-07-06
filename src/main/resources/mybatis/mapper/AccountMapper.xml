@@ -48,5 +48,8 @@
 			VALUES(#{createDate},#{shortUrl},#{userType},#{point},#{validDays},#{accountId},#{time},#{time});
 	</insert>
 	
+	<select id="getCities" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT id,city FROM city WHERE province_id=#{provinceId};
+	</select>
 	
 </mapper>

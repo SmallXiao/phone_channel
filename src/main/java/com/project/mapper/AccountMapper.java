@@ -1,5 +1,8 @@
 package com.project.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.project.entity.Url;
@@ -36,5 +39,7 @@ public interface AccountMapper {
 	public int createLink(@Param("shortUrl") String shortUrl, @Param("userType") String userType,
 			@Param("point") String point, @Param("createDate") int createDate, @Param("validDays") String validDays,
 			@Param("accountId") int accountId, @Param("time") long time);
+	
+	public List<Map<String, String>> getCities(@Param("provinceId")String provinceId);
 
 }

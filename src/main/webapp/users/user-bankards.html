@@ -619,7 +619,6 @@
 <script>
 
 (function($){
-	alert(1);
 	  $("#user-name").html(localStorage.getItem("name"));
 	
 	$.ajax({
@@ -640,25 +639,27 @@
 	    }
 	});
 
-	$("#J-province").change(function(){
-		alert(2);
-	});
 	
 })(jQuery);
 
-function getCities() {
-	alert(1);
-	var provid = $("#J-province").val();
-	alert(provid);
+// 绑定银行卡
+function bindingBank() {
+	var accountId = localStorage.getItem("id");
+	var sn = $("#sn").val();// 收款人姓名
+	var bankCardNo = $("#bankCardNo").val();// 卡号
+	var bankAllas = $("#bankAllas").val();// 开户行
+	var province = $("#J-province").val();// 开户省份
+	var city = $("#city").val();// 开户城市
+	var place = $("#place").val();// 开户网点
 	$.ajax({
-		url:"http://www.da883.com/hz/pay/getcities?provid=" + provid,
+		url:"/account/bindingBack/" + accountId,
 	    type:'GET',
+	    data:"";
 	    dataType:'JSON',
 	    success:function(result){
-	    	if (result.status == 1) {// 修改成功，跳转到首页
-			
-	    		payeeName = result.data;
-	    		$("#J-input-nickname").val(payeeName);
+	    	if (result.status == 1) {// 绑定银行卡成功
+				alert("绑定银行卡成功！")
+	    		
 	    	} else {
 	    		alert("网络异常，请重新尝试！");
 	    	}

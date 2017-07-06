@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 import com.project.util.DateUtils;
 
@@ -95,6 +97,11 @@ public class AccountManagerImpl implements AccountManager {
 		long currentTime = System.currentTimeMillis() / 1000;
 		int createDate = DateUtils.getYYYYMMDD();
 		return accountMapper.createLink(shortUrl, userType, point, createDate, validDays, accountId, currentTime);
+	}
+
+	@Override
+	public List<Map<String, String>> getCities(String provinceId) {
+		return accountMapper.getCities(provinceId);
 	}
 
 }
