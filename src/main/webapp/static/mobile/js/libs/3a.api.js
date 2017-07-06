@@ -38,7 +38,7 @@ Api = {
             'getPtGamesData': "/u/api/pt/games", //pt游戏列表
             'getPtGamesMenu': "/u/api/pt/types", //pt游戏导航
             'getUserInfo': "/mkg/api/pt/userinfo", //pt用户信息
-            'getCities': "/pay/getcities",//获取城市列表
+            'getCities': "/account/getcities",//获取城市列表
             'getUserBalance': "/mkg/api/users/user-monetary-info", //查询余额
             'getLotteryList': '/mkg/api/query/filters', //查询模块获取彩票彩种列表
             'getGameRecord': '/mkg/api/query/orders', //查询游戏记录
