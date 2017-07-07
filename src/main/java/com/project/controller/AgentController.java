@@ -1,5 +1,8 @@
 package com.project.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.entity.Url;
+import com.alibaba.fastjson.JSONObject;
+import com.project.entity.Link;
 import com.project.manager.AccountManager;
 import com.project.util.CommonUtil;
 import com.project.util.HttpServletUtil;
@@ -75,8 +79,8 @@ public class AgentController {
 	private final String redirectUrl(HttpServletResponse response, @PathVariable("shortUrl") String shortUrl) {
 		HttpServletUtil.initResponse(response);
 
-		Url url = accountManager.getUrl(shortUrl);// 得到短链接的长链接地址
-		if (url != null) {
+		Link link = accountManager.getLink(shortUrl);// 得到短链接的长链接地址
+		if (link != null) {
 			return "forward:/register.html";
 		}
 		return "redirect:/404.html";
@@ -96,10 +100,10 @@ public class AgentController {
 
 		LOG.trace(String.format("accountName：%s", name));
 		
-		Url url = accountManager.getUrl(shortUrl);
+		Link link = accountManager.getLink(shortUrl);
 		int result = 0;
-		if (url != null) {// 存在短链接
-			result = accountManager.createAgent(name, Md5.crypt(password), url.getPoint(), url.getUser_type(), url.getAccount_id());
+		if (link != null) {// 存在短链接
+			result = accountManager.createAgent(name, Md5.crypt(password), link.getPoint(), link.getUser_type(), link.getAccount_id());
 		}
 		return HttpServletUtil.getResponseJsonData(result, "success");
 	}
@@ -121,4 +125,55 @@ public class AgentController {
 		
 		return HttpServletUtil.getResponseJsonData(1, name, "success");
 	}
+	
+	/**
+	 * 得到当前用户下的代理用户和会员用户
+	 */
+	@RequestMapping(value="/users/{accountId}", method=RequestMethod.GET)
+	@ResponseBody
+	private final String getUsersByParentId(HttpServletResponse response, @PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+
+		LOG.trace("accountId：" + accountId);
+		List<Map<String, Object>> userList = accountManager.getUsersByParentId(accountId);
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("data", userList);
+		
+		return jsonObject.toJSONString();
+	}
+	
+	/**
+	 * 通过短链接匹配得到长连接
+	 */
+	@RequestMapping(value="/links/{accountId}", method=RequestMethod.GET)
+	@ResponseBody
+	private final String links(HttpServletResponse response, @PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+
+		LOG.trace("accountId：" + accountId);
+		List<Map<String, Object>> userList = accountManager.getLinks(accountId);
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("data", userList);
+		
+		return jsonObject.toJSONString();
+	}
+	
+	/**
+	 * 通过短链接匹配得到长连接
+	 */
+	@RequestMapping(value="/link_delete/{accountId}", method=RequestMethod.POST)
+	@ResponseBody
+	private final String deleteLink(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+
+		String linkId = request.getParameter("id");
+		LOG.trace("accountId：" + accountId);
+		int result = accountManager.deleteLink(accountId, linkId);
+		
+		return HttpServletUtil.getResponseJsonData(result, "success");
+	}
+	
 }

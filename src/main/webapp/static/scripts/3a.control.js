@@ -62,7 +62,6 @@
             element.parent().addClass('error');
         },
         submitHandler: function(form) {
-        	alert(11);
             $(":submit").addClass("loading").attr("data-value", "clicked");
             var sn = $('#sn').val();
             var bankCardNo = $('#bankCardNo').val();
@@ -78,9 +77,8 @@
                 'city': city,
                 'place': place
             }
-            alert(111);
             $.ajax({
-    			url:"/account/bindingBack/" + accountId,
+    			url:"/account/bindingBank/" + accountId,
     		    type:'GET',
     		    data:data,
     		    dataType:'JSON',
@@ -145,12 +143,6 @@
             });*/
         }
     });
-    function callback(result) { 
-    	var data = response.data;
-    	alert(data);
-        
-    }  
-    
     
     //路由判断 执行各页面逻辑
     var a = document.location.toString();

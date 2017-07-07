@@ -1,14 +1,15 @@
 package com.project.entity;
 
-public class Url {
+public class Link {
 
 	private int id;
 	private int create_date;
 	private String short_url;
 	private String user_type;
 	private String point;
-	private int valid_days;
+	private int expire;
 	private int account_id;
+	private int status;// 链接状态
 	private long create_time;
 	private long update_time;
 
@@ -52,12 +53,12 @@ public class Url {
 		this.point = point;
 	}
 
-	public int getValid_days() {
-		return valid_days;
+	public int getExpire() {
+		return expire;
 	}
 
-	public void setValid_days(int valid_days) {
-		this.valid_days = valid_days;
+	public void setExpire(int expire) {
+		this.expire = expire;
 	}
 
 	public int getAccount_id() {
@@ -66,6 +67,14 @@ public class Url {
 
 	public void setAccount_id(int account_id) {
 		this.account_id = account_id;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public long getCreate_time() {

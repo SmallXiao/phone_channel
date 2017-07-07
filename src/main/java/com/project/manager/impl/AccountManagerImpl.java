@@ -2,6 +2,7 @@ package com.project.manager.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -14,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.entity.Url;
+import com.project.entity.Link;
 import com.project.manager.AccountManager;
 import com.project.mapper.AccountMapper;
 
@@ -69,13 +70,13 @@ public class AccountManagerImpl implements AccountManager {
 		return accountMapper.createAgent(name, password, point, userType, parentId, currentTime);
 	}
 
-	public Url getUrl(String shortUrl) {
-		Url url = accountMapper.getUrl(shortUrl);
-		if (url != null) {
+	public Link getLink(String shortUrl) {
+		Link link = accountMapper.getLink(shortUrl);
+		if (link != null) {// 通过比对创建日期和有效日期，判断链接是否失效
 			int currentDate = DateUtils.getYYYYMMDD();
 			
-			int createDate = url.getCreate_date();
-			int validDays = url.getValid_days();
+			int createDate = link.getCreate_date();
+			int expire = link.getExpire();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			Calendar createCalendar = new GregorianCalendar();
 			try {
@@ -83,11 +84,11 @@ public class AccountManagerImpl implements AccountManager {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			createCalendar.add(Calendar.DAY_OF_MONTH, validDays);
+			createCalendar.add(Calendar.DAY_OF_MONTH, expire);
 			int date = DateUtils.getYYYYMMDD(createCalendar.getTime());
 			
 			if (currentDate <= date) {// 当前日期在有效日期内，返回url
-				return url;
+				return link;
 			}
 		}
 		return null;
@@ -101,8 +102,54 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	@Override
-	public List<Map<String, String>> getCities(String provinceId) {
+	public List<Map<String, Object>> getCities(String provinceId) {
 		return accountMapper.getCities(provinceId);
+	}
+
+	@Override
+	public List<Map<String, Object>> bankards(String accountId) {
+		return accountMapper.bankards(accountId);
+	}
+
+	@Override
+	public List<Map<String, Object>> getUsersByParentId(String parentId) {
+		return accountMapper.getUsersByParentId(parentId);
+	}
+
+	@Override
+	public List<Map<String, Object>> getLinks(String accountId) {
+		List<Map<String, Object>> linkList = accountMapper.getLinks(accountId);
+		int currentDate = DateUtils.getYYYYMMDD();
+		int createDate, expire, status;
+		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>(linkList.size());
+		Map<String, Object> map;
+		for (int i = 0, size = linkList.size(); i < size; i++) {// 通过比对创建日期和有效日期，判断链接是否失效
+			map = linkList.get(i);
+			status = 0;
+			createDate = Integer.parseInt(map.get("create_date").toString());
+			expire = Integer.parseInt(map.get("expire").toString());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			Calendar createCalendar = new GregorianCalendar();
+			try {
+				createCalendar.setTime(sdf.parse(String.valueOf(createDate)));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			createCalendar.add(Calendar.DAY_OF_MONTH, expire);
+			int date = DateUtils.getYYYYMMDD(createCalendar.getTime());
+			
+			if (currentDate <= date) {// 当前日期在有效日期内，返回url
+				status = 1;
+			}
+			map.put("status", status);
+			resultList.add(map);
+		}
+		return resultList;
+	}
+
+	@Override
+	public int deleteLink(String accountId, String linkId) {
+		return accountMapper.deleteLink(accountId, linkId);
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.project.entity.Url;
+import com.project.entity.Link;
 
 public interface AccountMapper {
 
@@ -34,15 +34,23 @@ public interface AccountMapper {
 	public int createAgent(@Param("name") String name, @Param("password") String password, @Param("point") String point,
 			@Param("type") String userType, @Param("parentId") int parentId, @Param("time") long time);
 
-	public Url getUrl(@Param("shortUrl") String shortUrl);
+	public Link getLink(@Param("shortUrl") String shortUrl);
 
 	public int createLink(@Param("shortUrl") String shortUrl, @Param("userType") String userType,
 			@Param("point") String point, @Param("createDate") int createDate, @Param("validDays") String validDays,
 			@Param("accountId") int accountId, @Param("time") long time);
 	
-	public List<Map<String, String>> getCities(@Param("provinceId")String provinceId);
+	public List<Map<String, Object>> getCities(@Param("provinceId")String provinceId);
 	
 	public int bindingBank(@Param("accountId") String accountId, @Param("payeeName")String payeeName, @Param("cardNumber")String cardNumber,
 			@Param("bankAllas")String bankAllas, @Param("province")String province, @Param("city")String city, @Param("place")String place, @Param("time")long time);
 
+	public List<Map<String, Object>> bankards(@Param("accountId") String accountId);
+	
+	public List<Map<String, Object>> getUsersByParentId(@Param("parentId")String parentId);
+	
+	public List<Map<String, Object>> getLinks(@Param("accountId") String accountId);
+	
+	public int deleteLink(@Param("accountId") String accountId, @Param("linkId") String linkId);
+	
 }

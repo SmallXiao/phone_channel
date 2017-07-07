@@ -206,14 +206,9 @@
 					</div>
 				</div>
 
-				<a href="/home" class="left" id="logo">多宝2游戏</a> <span
+				<a href="/home.html" class="left" id="logo">多宝2游戏</a> <span
 					class="logo-diff">多宝2游戏</span>
 				<ul class="nav-content right">
-					<!--<li>
-				<a class="nav-home" href="/hz/home">
-					<i></i><span>首页</span>
-				</a>
-			</li>-->
 					<li data-gamelist><a class="nav-lobby" id="lottery-menu"
 						href="javascript:;"> <i></i><span>彩票中心</span>
 					</a></li>
@@ -603,28 +598,28 @@
 <script type="text/javascript">
 (function($){
 	  $("#user-name").html(localStorage.getItem("name"));
-	
-	/* $.ajax({
-		url:"/account/bankards/" + accountId,
-	    type:'GET',
-	    dataType:'JSON',
-	    success:function(result){
-	    	if (result.status == 1) {// 修改成功，跳转到首页
-	    		var html = '<tr><td data-card-number>**2039</td><input type="text" disabled class="cardNo" id="cardNo" style='display: none' value="**2039"><td>中国银行</td><td data-bind-name>王**</td></tr>';
-			
-	    		payeeName = result.data;
-	    		$("#J-input-nickname").val(payeeName);
-	    	} else {
-	    		alert("网络异常，请重新尝试！");
-	    	}
+	  var accountId = localStorage.getItem("id");
+	  $.ajax({// 加载当前用户银行卡信息
+		  url:"/account/bankards/" + accountId,
+	      type:'GET',
+	      dataType:'JSON',
+	      success:function(result){
+	    	  console.log(result);
+	    	  var data = result.data;
+	    	  var html;
+	    	  for (var i in data) {
+                  var t = data[i];
+                  html += '<tr><td data-card-number>' + t.card_number + '</td><input type="text" disabled class="cardNo" id="cardNo" style="display: none" value="**2039"><td>'
+                  		+t.bank_allas+'</td><td data-bind-name>' + t.payee_name + '</td></tr>';
+              }
+              $(".table").append(html);
+	    	
 	    },error:function(result){
 	    	console.log("网络异常，请重新尝试！");
 	    }
-	}); */
+	});
 
 	$("#bandBtn").click(function() {// 绑定银行卡
-		alert(2);
-		var accountId = localStorage.getItem("id");
 		var sn = $("#sn").val();// 收款人姓名
 		var bankCardNo = $("#bankCardNo").val();// 卡号
 		var bankAllas = $("#bankAllas").val();// 开户行
@@ -648,7 +643,7 @@
 		    success:function(result){
 		    	if (result.status == 1) {// 绑定银行卡成功
 					alert("绑定银行卡成功！")
-		    		
+		    		window.location.reload();
 		    	} else {
 		    		alert("网络异常，请重新尝试！");
 		    	}

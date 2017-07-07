@@ -216,7 +216,7 @@
 			<div class="mobile-menu" data-overdropdown="dropdown"><!--<img src="/static/theme/xinbao/images/vcode.png" alt="" align="center" width="164" height="164">--></div>
 		</div>
 
-		<a href="/hz/home" class="left" id="logo">多宝2游戏</a>
+		<a href="/home.html" class="left" id="logo">多宝2游戏</a>
 		<span class="logo-diff">多宝2游戏</span>
 		<ul class="nav-content right">
 			<li data-gamelist>
@@ -511,9 +511,6 @@ $('.user-type-icon-agent').parent().click();
 
 			var accountId = localStorage.getItem("id");
 			$.post("/agent/create_link/"+accountId,data,function(res){
-				console.log(res);
-				alert(res);
-				alert(res.status);
 				if(res.status==1){
                     commonUtil.commonTipAlert_f('创建链接成功');
 				}else{

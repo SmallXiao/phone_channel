@@ -13,8 +13,8 @@
         drawcash: '/mkg/api/query/withdraw', //提现记录
         single: '/mkg/api/query/dayreport', //个人报表
         team: '/mkg/api/query/teamreport', //团队报表
-        user: '/mkg/api/agent/users', //用户列表
-        links: '/mkg/api/agent/links', //注册链接
+        user: '/agent/users', //用户列表
+        links: '/agent/links', //注册链接
         msgs: '/u/api/message/queryMessage', //消息列表
         thirdgame: '/api/i/u/query/tpOrders', //游戏记录
         salary: '/mkg/api/query/userSalary', //日工资
@@ -217,7 +217,7 @@
             //切换tab直接查询
             var isInit = false; 
 
-            if (location.pathname == '/hz/mkg/teamreport.html' || location.pathname == '/hz/mkg/dayreport.html') {
+            if (location.pathname == '/teamreport.html' || location.pathname == '/dayreport.html') {
                 $('#J-date-start').val($('#J-date-end').val());
                 if (location.hash == '#salary_view') {
                     $('#J-date-start,#J-date-end').val((new Date()).DateAdd('d', -1).Format("yyyy-MM-dd"));
@@ -226,7 +226,7 @@
                     $('#J-date-start,#J-date-end,#startInner,#endInner').val((new Date()).DateAdd('d', -1).Format("yyyy-MM-dd"));
                 }
             }
-            if (location.pathname == '/hz/mkg/orders.html') {
+            if (location.pathname == '/orders.html') {
                 $('#J-date-start').val((new Date()).Format("yyyy-MM-dd 00:00:00"));
                 $('#J-date-end').val((new Date()).Format("yyyy-MM-dd 23:59:59"));
             }
@@ -792,7 +792,7 @@
                     '<td>' + data[i].point + '</td>' +
                     '<td>' + data[i].registerTime + '</td>' +
                     '<td>' +
-                    (canSet == 0 ? '<a class="ui-action-adjust" href="/hz/mkg/agent/user/' + data[i].userId + '">设置</a>' +
+                    (canSet == 0 ? '<a class="ui-action-adjust" href="/agent/user/' + data[i].userId + '">设置</a>' +
                         (parseInt(transferTurn) > 0 ? '<a class="ui-action-check" href="/hz/mkg/pay/agentTransfer.html#lowerName=' + data[i].userName + '&lowerId=' + data[i].userId + '">转账</a>' : '') :
                         ''
                     ) +

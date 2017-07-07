@@ -1,6 +1,5 @@
 package com.project.controller;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.project.manager.AccountManager;
 import com.project.util.HttpServletUtil;
@@ -159,16 +157,18 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping(value="/bankards/{accountId}", method = RequestMethod.GET)
+	@ResponseBody
 	private final String bankards(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("accountId") String accountId) {
 		HttpServletUtil.initResponse(response);
 		
-//		List<String> bankList = accountManager.bankards(accountId);
+		LOG.trace("accountId：" + accountId);
+		List<Map<String, Object>> bankList = accountManager.bankards(accountId);
 		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("data", bankList);
 		
-//		return HttpServletUtil.getResponseJsonData(1, data, "success");
-		return null;
-		
+		return jsonObject.toJSONString();
 	}
 	
 	
@@ -204,7 +204,7 @@ public class AccountController {
 		HttpServletUtil.initResponse(response);
 		String provinceId = request.getParameter("provinceId");
 		
-		List<Map<String, String>> citiesMap = accountManager.getCities(provinceId);
+		List<Map<String, Object>> citiesMap = accountManager.getCities(provinceId);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("data", citiesMap);
 		

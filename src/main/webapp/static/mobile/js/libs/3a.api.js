@@ -49,11 +49,11 @@ Api = {
             'getDayreportRecord': '/mkg/api/query/dayreport', //个人报表
             'getQrPayChannelList':'/mkg/api/pay/getQrPayChannelList',//获取扫描充值方式
             'getTeamRecord': '/mkg/api/query/teamreport', //团队报表
-            'getUserList': '/mkg/api/agent/users', //用户列表
+            'getUserList': '/agent/users', //用户列表
             'cancelOrder': '/mkg/api/order/cancel', //撤单
             'cancelTrace': '/mkg/api/order/trace_cancel', //追号撤单
-            'getUserLinks': '/mkg/api/agent/links', //链接管理
-            'deleteUserLinks': '/mkg/api/agent/link_delete', //删除链接
+            'getUserLinks': '/agent/links', //链接管理
+            'deleteUserLinks': '/agent/link_delete', //删除链接
             'getMsgCount': '/u/api/message/queryUnRMCount', //获取消息数
             'getQueryMessage': '/u/api/message/queryMessage', //消息列表数据
             'getIsRead': '/u/api/message/read', //阅读信息传送
@@ -227,7 +227,7 @@ Api = {
     getUserList: function(p, fn){
         Api.getCommon('getUserList', p, fn);
     },
-    getUserLinks: function(p, fn){
+   getUserLinks: function(p, fn){
         Api.getCommon('getUserLinks', p, fn);
     },
     cancelOrder: function(p, fn) {

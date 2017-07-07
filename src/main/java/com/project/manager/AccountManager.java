@@ -3,7 +3,7 @@ package com.project.manager;
 import java.util.List;
 import java.util.Map;
 
-import com.project.entity.Url;
+import com.project.entity.Link;
 
 public interface AccountManager {
 
@@ -55,7 +55,7 @@ public interface AccountManager {
 	 * @param shortUrl		短链接
 	 * @return
 	 */
-	public Url getUrl(String shortUrl);
+	public Link getLink(String shortUrl);
 	
 	public int createLink(String shortUrl, String userType, String point, String validDays,
 						  int accountId);
@@ -65,6 +65,13 @@ public interface AccountManager {
 	 * @param provinceId
 	 * @return
 	 */
-	public List<Map<String, String>> getCities(String provinceId);
+	public List<Map<String, Object>> getCities(String provinceId);
+	
+	public List<Map<String, Object>> bankards(String accountId);
+	
+	public List<Map<String, Object>> getUsersByParentId(String parentId);
+	
+	public List<Map<String, Object>> getLinks(String accountId);
 
+	public int deleteLink(String accountId, String linkId);
 }

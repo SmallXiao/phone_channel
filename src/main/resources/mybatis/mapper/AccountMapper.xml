@@ -39,12 +39,12 @@
 	
 	</insert>
 
-	<select id="getUrl" parameterType="java.lang.String" resultType="Url">
-		SELECT * FROM url WHERE short_url=#{shortUrl};
+	<select id="getLink" parameterType="java.lang.String" resultType="Link">
+		SELECT * FROM link WHERE short_url=#{shortUrl};
 	</select>
 
 	<insert id="createLink" parameterType="java.lang.String">
-		INSERT INTO url(create_date,short_url,user_type,point,valid_days,account_id,create_time,update_time)
+		INSERT INTO link(create_date,short_url,user_type,point,expire,account_id,create_time,update_time)
 			VALUES(#{createDate},#{shortUrl},#{userType},#{point},#{validDays},#{accountId},#{time},#{time});
 	</insert>
 	
@@ -56,5 +56,22 @@
 		INSERT INTO bank(account_id,payee_name,card_number,bank_allas,province,city,place,create_time,update_time)
 			VALUES(#{accountId}, #{payeeName}, #{cardNumber}, #{bankAllas}, #{province}, #{city}, #{place}, #{time}, #{time});
 	</insert>
+	
+	<select id="bankards" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT card_number,payee_name,bank_allas,province,city,place FROM bank WHERE account_id=#{accountId};
+	</select>
+	
+	<select id="getUsersByParentId" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT name,type,point,remain_amount,create_time FROM account WHERE parent_id=#{parentId};
+	</select>
+	
+	<select id="getLinks" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT id,create_date,short_url,user_type,point,expire,create_time FROM link WHERE account_id=#{accountId};
+	
+	</select>
+	
+	<delete id="deleteLink" parameterType="java.lang.String">
+		DELETE FROM link WHERE account_id=#{accountId} AND id=#{linkId};
+	</delete>
 	
 </mapper>

@@ -12,7 +12,6 @@
   <meta http-equiv="Cache-Control" CONTENT="no-cache">
   <meta http-equiv="Pragma" CONTENT="no-cache">
   <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-  <!-- build:css /assets/styles/exclusive.min.css -->
   <link media="all" type="text/css" rel="stylesheet" href="/assets/css/top-bar.css">
   <link media="all" type="text/css" rel="stylesheet" href="/assets/css/nav.css">
   <link media="all" type="text/css" rel="stylesheet" href="/assets/css/jBox.css">
@@ -59,7 +58,7 @@
         tabslet:'/static/scripts/vendor/jquery.tabslet.min',
         cookie:'/static/scripts/vendor/jquery.cookie',
         def:'/static/scripts/3a.default',
-        page:'/static/scripts/3a.page',
+        //page:'/static/scripts/3a.page',
         global:'/static/scripts/vendor/global',
         dsgame_base:'/assets/js/dsgame.base',
         dsgame_Ernie:'/assets/js/dsgame.Ernie',
@@ -119,7 +118,6 @@
     });
 
     require([
-      //'css!/assets/css/ucenter.css',
       'css!/static/theme/' + keyWords + '/styles/home.css',
       'css!/static/theme/' + keyWords + '/styles/colors.css',
       'jquery','pagination','jBox','3a.api','3a.util',"jquery.validate" ,'easing','addtional','jquery.cookie',
@@ -201,10 +199,6 @@
 						<li class="deposit-record">
 							<a href="/statement.html#recharge_view">
 								<span class="opacity-60">充值记录</span>
-								<span class="li-line">|</span>
-								<li class="top-account-gm">
-									<a class="opacity-60" data-call-center href="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=819082&configID=64920&jid=6634132239&s=1" target="_blank">多宝2客服</a>
-								</li>
 							</a>
 						</li>
 			</ul>
@@ -216,17 +210,12 @@
 		<div id="relatelnk" data-overdropdown="handler">
 			<a href="/static/download.html" class="mobile-lnk" target="_blank"><em class="m_ico">&#59197;</em><span>APP下载</span></a>
 			<a href="/static/download.html" id="pcclient" target="_blank"><em class="m_ico">&#59199;</em><span>客户端</span></a>
-			<div class="mobile-menu" data-overdropdown="dropdown"><!--<img src="/static/theme/xinbao/images/vcode.png" alt="" align="center" width="164" height="164">--></div>
+			<div class="mobile-menu" data-overdropdown="dropdown"></div>
 		</div>
 
-		<a href="/hz/home" class="left" id="logo">多宝2游戏</a>
+		<a href="/home.html" class="left" id="logo">多宝2游戏</a>
 		<span class="logo-diff">多宝2游戏</span>
 		<ul class="nav-content right">
-			<!--<li>
-				<a class="nav-home" href="/hz/home">
-					<i></i><span>首页</span>
-				</a>
-			</li>-->
 			<li data-gamelist>
 				<a class="nav-lobby" id="lottery-menu" href="javascript:;">
 					<i></i><span>彩票中心</span>
@@ -386,7 +375,7 @@
 				</div>
 				<div class="item-info clearfix">
 					<div class="data-overview">
-						<p>总链接数<span id="J-total-num">0</span></p>
+						<p>总链接数：<span id="J-total-num"></span></p>
 					</div>
 				</div>
 			</div>
@@ -412,10 +401,8 @@
 		</div>
 	</div>
 </div>
-
       </div>
       <div id="template-footer">
-        
 <div id="copyright" class="wrap" style="height:58px;padding-top:0px;position: relative;">
 	<div class="wrap-inner clearfix" style="">
         <div class="footer-nav" style="margin-top:10px;"><a href="/static/help.html#30">关于多宝2</a>
@@ -430,4 +417,65 @@
       </div>
   </div>
 </body>
+<script type="text/javascript">
+$(function() {
+	 var accountId = localStorage.getItem("id");
+	  $.ajax({// 加载当前用户银行卡信息
+		  url:"/agent/links/" + accountId,
+	      type:'GET',
+	      dataType:'JSON',
+	      success:function(result){
+	    	  var data = result.data;
+	    	  var content = '';
+              for (var i = 0; i < data.length; i++) {
+            	  var item = data[i];
+                  var expireTime = item.expire == -1 ? "永久有效" : item.expire + "天"
+                  var status = item.status == 1 ? "正常" : "失效";
+                  var userType = item.userType == 0 ? "会员" : "代理";
+                  var point = item.point;
+                  content += "<tr class=' table-tr-item '>" +
+                      "<td class='text-center'>推广</td>" +
+                      "<td><input type='text' id='copy_input_" + i + "' onClick='this.select();' class='input w-3' value='" + "http://" + window.location.host + "/agent/" + item.short_url + "' /><span id='copy_btn' class='copy_btn' data-clipboard-target='#copy_input_" + i + "'>复制</span></td>" +
+                      "<td>" + userType + "</td>" +
+                      "<td>" + status + "</td>" +
+                      "<td>" + point + "%</td>" +
+                      "<td>" + expireTime + "</td>" +
+                      "<td>" + item.create_date + "</td>" +
+                      (item.status == 1 ? "<td><a data-linkid=" + item.id + " class='ui-action-delete confirmDelete' href='javascript:void(0);'>删除</a></td>" : '<td>无</td>') +
+                      "</tr>"
+              }
+              $("#J-table").append(content);
+              $("#J-total-num").text(data.length);
+              $('.confirmDelete').click(function() {
+            	  var linkId = $(this).attr('data-linkid');
+                  var dataQuery = {
+                		  id: linkId
+              }
+               $.ajax({// 加载当前用户银行卡信息
+         		  url:"/agent/link_delete/" + accountId,
+         	      type:'POST',
+         	      data:dataQuery,
+         	      dataType:'JSON',
+         	      success:function(result){
+         	    	  if (result.status === 1) {
+         	    		 commonUtil.commonTipAlert_f('删除成功！');
+	         	    	  window.location.reload();
+         	    	  } else {
+         	    		 commonUtil.showTip('网络异常，请稍候再试！');
+         	    	  }
+         	      }, error:function() {
+         	    	 commonUtil.showTip('网络异常，请稍候再试！');
+         	      }
+         	   });
+                  
+            });
+	    	
+	    },error:function(result){
+	    	console.log("网络异常，请重新尝试！");
+	    }
+	});
+});
+
+
+</script>
 </html>
