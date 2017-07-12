@@ -64,7 +64,7 @@ public class AccountController {
 		String accountName = request.getParameter("accountName");
 		String password = request.getParameter("password");
 		String accountId = accountManager.login(accountName, Md5.crypt(password));
-		LOG.trace(String.format("accountName：%s，password：%s，count：%s", accountName, password, accountId));
+		LOG.trace(String.format("accountName：%s，accountId：%s", accountName, accountId));
 		
 		return HttpServletUtil.getResponseJsonData(1, accountId, "success");
 	}
