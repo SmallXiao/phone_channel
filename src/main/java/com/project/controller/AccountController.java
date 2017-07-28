@@ -211,5 +211,25 @@ public class AccountController {
 		return jsonObject.toJSONString();
 	}
 	
+	/**
+	 * 购买彩票
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/buy/{accountId}", method = RequestMethod.POST)
+	@ResponseBody
+	private final String buy(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("accountId") String accountId) {
+		HttpServletUtil.initResponse(response);
+		String provinceId = request.getParameter("provinceId");
+		
+		List<Map<String, Object>> citiesMap = accountManager.getCities(provinceId);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("data", citiesMap);
+		
+		return jsonObject.toJSONString();
+	}
+	
 	
 }
